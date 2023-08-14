@@ -3,9 +3,9 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class PanelGame extends JFrame  implements KeyListener, MouseListener{
+public class PanelGame extends JFrame  implements KeyListener, MouseListener, MouseMotionListener{
 
- 
+    int i;
 
     JLabel quadradoAmbulante;
 
@@ -18,6 +18,9 @@ public class PanelGame extends JFrame  implements KeyListener, MouseListener{
         this.setLayout(null);
         this.addKeyListener(this);
         this.isDoubleBuffered();
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
+        this.setLocationRelativeTo(null);
 
         
         quadradoAmbulante = new JLabel();
@@ -25,7 +28,7 @@ public class PanelGame extends JFrame  implements KeyListener, MouseListener{
         quadradoAmbulante.setBounds(100, 50, 150,150);
         quadradoAmbulante.setOpaque(true);
 
-        quadradoAmbulante.addMouseListener(this);
+        
 
         this.add(quadradoAmbulante);
     }
@@ -34,16 +37,16 @@ public class PanelGame extends JFrame  implements KeyListener, MouseListener{
 
 
     public void keyTyped(KeyEvent e){
-        //switch(e.getKeyChar()){
-        //    case 'a': quadradoAmbulante.setLocation(quadradoAmbulante.getX()-20, quadradoAmbulante.getY());
-        //        break;
-        //    case 'w': quadradoAmbulante.setLocation(quadradoAmbulante.getX(), quadradoAmbulante.getY()-20);
-        //        break;
-        //    case 's': quadradoAmbulante.setLocation(quadradoAmbulante.getX(), quadradoAmbulante.getY()+20);
-        //        break;
-        //    case 'd': quadradoAmbulante.setLocation(quadradoAmbulante.getX()+20, quadradoAmbulante.getY());
-        //        break;
-        //}
+        switch(e.getKeyChar()){
+            case 'a': quadradoAmbulante.setLocation(quadradoAmbulante.getX()-20, quadradoAmbulante.getY());
+                break;
+            case 'w': quadradoAmbulante.setLocation(quadradoAmbulante.getX(), quadradoAmbulante.getY()-20);
+                break;
+            case 's': quadradoAmbulante.setLocation(quadradoAmbulante.getX(), quadradoAmbulante.getY()+20);
+                break;
+            case 'd': quadradoAmbulante.setLocation(quadradoAmbulante.getX()+20, quadradoAmbulante.getY());
+                break;
+        }
     }
 
     public void keyPressed(KeyEvent e){//sobrescrevendo
@@ -57,8 +60,7 @@ public class PanelGame extends JFrame  implements KeyListener, MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseClicked'");
+        System.out.println("Click");
     }
 
 
@@ -66,8 +68,6 @@ public class PanelGame extends JFrame  implements KeyListener, MouseListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mousePressed'");
     }
 
 
@@ -75,8 +75,6 @@ public class PanelGame extends JFrame  implements KeyListener, MouseListener{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseReleased'");
     }
 
 
@@ -96,6 +94,34 @@ public class PanelGame extends JFrame  implements KeyListener, MouseListener{
     public void mouseExited(MouseEvent e) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
+    }
+
+
+
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseDragged'");
+    }
+
+
+
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        for(i = 0; i <= 300; i++){
+
+            //System.out.println(i);
+
+        }
+
+        if(i == 300){
+            i = 0;
+        }
+
+        quadradoAmbulante.setLocation(e.getX() - 75, e.getY() - 75);
+        System.out.println("cu");
     }
 
 }
