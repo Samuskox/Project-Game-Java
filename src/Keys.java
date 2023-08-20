@@ -1,4 +1,3 @@
-import java.awt.event.KeyEvent;
 import org.w3c.dom.events.MouseEvent;
 import java.awt.event.*;
 
@@ -33,8 +32,7 @@ public class Keys implements MouseListener{
 
     @Override
     public void mouseEntered(java.awt.event.MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseEntered'");
+        System.out.println("olá");
     }
 
 
@@ -45,4 +43,7 @@ public class Keys implements MouseListener{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
     }
+
+
+
 }

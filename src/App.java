@@ -12,6 +12,7 @@ public class App{
         PanelGame painel = new PanelGame();
 
         window.add(painel);
+        //painel.startGameThread();
         //JPanel quadrado = new JPanel();
         //quadrado.setBackground(Color.BLACK);
         //quadrado.setBounds(100, 50, 200, 200);
