@@ -2,6 +2,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -15,6 +19,12 @@ public class PanelGame extends JPanel implements Runnable{
     int yVelo = 1;
     int x = 0;
     int y = 0;
+    int tempoDeJogo = 0;
+    int segundos = 0;
+
+    
+
+    Image robo ;
 
     PanelGame(){
         this.setSize(650,450);
@@ -24,6 +34,11 @@ public class PanelGame extends JPanel implements Runnable{
         this.addMouseMotionListener(mouse);
         this.setFocusable(true);
         this.setDoubleBuffered(true);
+
+        try {
+            robo = ImageIO.read(getClass().getResourceAsStream("Player.png"));
+        } catch (IOException e) {
+        }
     }
 
     //Thread gameThread;
@@ -36,14 +51,12 @@ public class PanelGame extends JPanel implements Runnable{
     //Aqui no run() onde tudo que vai ocorrer milisegundo por milisegundo
     @Override
     public void run() {
-        while(run == true){
+        while(run){
             try {
-                Thread.sleep(16);
+                Thread.sleep(17);
             } catch (InterruptedException e) {
             }
-            //System.out.println("oi to rodando porra");
-            x = x+xVelo;
-            y = y+yVelo;
+
             repaint();
             update();
         }
@@ -53,15 +66,27 @@ public class PanelGame extends JPanel implements Runnable{
 
     public void paint(Graphics g){
 
-    super.paint(g);
+        super.paint(g);
       Graphics2D g2D = (Graphics2D) g;
-      //g2D.drawImage(robo,50,50,null);
-      g2D.fillRect(x, y, 80, 80);
+      g2D.drawImage(robo,x,y,null);
+      //g2D.fillRect(x, y, 20, 80);
       g2D.dispose();
     }
 
     public void update(){
+        //System.out.println("oi to rodando porra");
+        x += xVelo;
+        y += yVelo;
+        //System.out.println(tempoDeJogo);
+        tempoDeJogo++;
+        if(tempoDeJogo > 60){
+            tempoDeJogo = 0;
+            segundos++;
 
+            System.out.println(segundos);
+
+
+        }
     }
 
 

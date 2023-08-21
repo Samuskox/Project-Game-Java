@@ -3,8 +3,8 @@ import java.awt.event.*;
 
 public class Keys implements MouseListener, MouseMotionListener{
 
-    int xizinho;
-    int ypsilinho;
+    float xizinho;
+    float ypsilinho;
 
     @Override
     public void mouseClicked(java.awt.event.MouseEvent e) {
