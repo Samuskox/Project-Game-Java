@@ -21,7 +21,7 @@ public class PanelGame extends JPanel implements Runnable{
     int y = 0;
     int tempoDeJogo = 0;
     int segundos = 0;
-
+    boolean direita = true;
     
 
     Image robo ;
@@ -34,6 +34,7 @@ public class PanelGame extends JPanel implements Runnable{
         this.addMouseMotionListener(mouse);
         this.setFocusable(true);
         this.setDoubleBuffered(true);
+        
 
         try {
             robo = ImageIO.read(getClass().getResourceAsStream("Player.png"));
@@ -75,8 +76,35 @@ public class PanelGame extends JPanel implements Runnable{
 
     public void update(){
         //System.out.println("oi to rodando porra");
+        
         x += xVelo;
-        y += yVelo;
+     while(direita){
+        x += xVelo;
+     }
+
+     //while(direita == false){
+     //   x += -xVelo;
+     //}
+     //if(x == 650-robo.getWidth(null)){
+     //   direita = false;
+     //}
+
+     //if(x == 0+robo.getWidth(null)){
+     //   direita = true;
+     //}
+
+
+     
+         //x += xVelo;
+     
+     
+       
+     
+     //if(y>=450-64){
+     //   y += -yVelo;
+     //}
+     
+        
         //System.out.println(tempoDeJogo);
         tempoDeJogo++;
         if(tempoDeJogo > 60){
