@@ -15,8 +15,8 @@ public class PanelGame extends JPanel implements Runnable{
     
 
     boolean run = true;
-    int xVelo = 2;
-    int yVelo = 2;
+    int xVelo = 4;
+    int yVelo = 4;
     int x = 200;
     int y = 200;
     int tempoDeJogo = 0;
