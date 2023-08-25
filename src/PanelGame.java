@@ -15,19 +15,21 @@ public class PanelGame extends JPanel implements Runnable{
     
 
     boolean run = true;
-    int xVelo = 1;
-    int yVelo = 1;
-    int x = 0;
-    int y = 0;
+    int xVelo = 2;
+    int yVelo = 2;
+    int x = 200;
+    int y = 200;
     int tempoDeJogo = 0;
     int segundos = 0;
     boolean direita = true;
+    int vaiPralaX;
+    int vaiPralaY;
     
 
     Image robo ;
 
     PanelGame(){
-        this.setSize(650,450);
+        this.setSize(700,500);
         this.setBackground(Color.PINK);
         this.addMouseListener(mouse);
         this.setDoubleBuffered(true);
@@ -75,34 +77,26 @@ public class PanelGame extends JPanel implements Runnable{
     }
 
     public void update(){
-        //System.out.println("oi to rodando porra");
+
         
-        x += xVelo;
-     while(direita){
-        x += xVelo;
-     }
 
-     //while(direita == false){
-     //   x += -xVelo;
-     //}
-     //if(x == 650-robo.getWidth(null)){
-     //   direita = false;
-     //}
+        if(mouse.click){
+            vaiPralaX = (int) mouse.xizinho - 32;
+            vaiPralaY =  (int) mouse.ypsilinho;
 
-     //if(x == 0+robo.getWidth(null)){
-     //   direita = true;
-     //}
+            if(vaiPralaX > x){
+                x += xVelo;
+            } else {
+                x -= xVelo;
+            }
 
+            if(vaiPralaY > y){
+                y += yVelo;
+            } else{
+                y -= yVelo;
+            }
+        }
 
-     
-         //x += xVelo;
-     
-     
-       
-     
-     //if(y>=450-64){
-     //   y += -yVelo;
-     //}
      
         
         //System.out.println(tempoDeJogo);
@@ -111,7 +105,7 @@ public class PanelGame extends JPanel implements Runnable{
             tempoDeJogo = 0;
             segundos++;
 
-            System.out.println(segundos);
+            //System.out.println(segundos);
 
 
         }

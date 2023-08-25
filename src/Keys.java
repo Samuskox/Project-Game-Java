@@ -5,9 +5,16 @@ public class Keys implements MouseListener, MouseMotionListener{
 
     float xizinho;
     float ypsilinho;
+    boolean click;
 
     @Override
     public void mouseClicked(java.awt.event.MouseEvent e) {
+        xizinho = e.getX();
+        ypsilinho = e.getY();
+
+        click = true;
+        System.out.println("oi clickei");
+        System.out.println("X: "+xizinho+"Y:"+ypsilinho);
     }
 
 
@@ -23,6 +30,7 @@ public class Keys implements MouseListener, MouseMotionListener{
 
     @Override
     public void mouseReleased(java.awt.event.MouseEvent e) {
+        click =false;
 
     }
 
@@ -55,10 +63,9 @@ public class Keys implements MouseListener, MouseMotionListener{
 
     @Override
     public void mouseMoved(java.awt.event.MouseEvent e) {
-        xizinho = e.getX();
-        ypsilinho = e.getY();
+        
 
-        System.out.println("TO MOVENDO AQUI PORA: X: "+xizinho+" Y: "+ypsilinho);
+        //System.out.println("TO MOVENDO AQUI PORA: X: "+xizinho+" Y: "+ypsilinho);
     }
 
 
