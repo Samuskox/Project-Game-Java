@@ -15,22 +15,28 @@ public class PanelGame extends JPanel implements Runnable{
     
 
     boolean run = true;
-    int xVelo = 4;
-    int yVelo = 4;
-    int x = 200;
-    int y = 200;
+    float xVelo = 4;
+    float yVelo = 4;
+    int x = 0;
+    int y = 0;
+
+    int x2 = 0;
+    int y2 = 0;
     int tempoDeJogo = 0;
     int segundos = 0;
     boolean direita = true;
-    int vaiPralaX;
-    int vaiPralaY;
+    float vaiPralaX = 200;
+    float vaiPralaY = 200;
+    float angulo;
+    float cooldown;
+    float angulo2;
     
 
     Image robo ;
 
     PanelGame(){
         this.setSize(700,500);
-        this.setBackground(Color.PINK);
+        //this.setBackground(Color.PINK);
         this.addMouseListener(mouse);
         this.setDoubleBuffered(true);
         this.addMouseMotionListener(mouse);
@@ -69,33 +75,48 @@ public class PanelGame extends JPanel implements Runnable{
 
     public void paint(Graphics g){
 
+        
+
         super.paint(g);
       Graphics2D g2D = (Graphics2D) g;
-      g2D.drawImage(robo,x,y,null);
+      
+      g2D.setColor(Color.pink);
+      //g2D.translate(50, 50);
+      
+        g2D.rotate(-angulo2);
+      
+      
+      g2D.fillArc(x, y, 50, 50, x, y);
+      //g2D.rotate(0.77);
+      
+      
+      //g2D.drawImage(robo,x,y,null);
       //g2D.fillRect(x, y, 20, 80);
       g2D.dispose();
     }
 
     public void update(){
-
+        angulo2 = (float)Math.atan2((y),(x+32)) ;
+        
         
 
         if(mouse.click){
-            vaiPralaX = (int) mouse.xizinho - 32;
-            vaiPralaY =  (int) mouse.ypsilinho;
 
-            if(vaiPralaX > x){
-                x += xVelo;
-            } else {
-                x -= xVelo;
-            }
-
-            if(vaiPralaY > y){
-                y += yVelo;
-            } else{
-                y -= yVelo;
-            }
+            vaiPralaX = mouse.xizinho - 32;
+            vaiPralaY = mouse.ypsilinho - 2;
+            angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
+            xVelo = (float) ((10)*Math.cos(angulo));
+            yVelo = (float) ((10)*Math.sin(angulo));
+            x += xVelo;
+            y += yVelo;
         }
+            
+        
+               
+       
+            
+        
+        
 
      
         
