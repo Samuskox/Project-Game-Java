@@ -103,10 +103,10 @@ public class PanelGame extends JPanel implements Runnable{
     }
 
     public void update(){
+        vaiPralaX = mouse.xizinho - 32;
+        vaiPralaY = mouse.ypsilinho - 2;
         if(mouse.click){
             angulo2 = (float) Math.atan2(vaiPralaY + y,vaiPralaX + x) ;
-            vaiPralaX = mouse.xizinho - 32;
-            vaiPralaY = mouse.ypsilinho - 2;
             angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
             xVelo = (float) ((8)*Math.cos(angulo));
             yVelo = (float) ((8 )*Math.sin(angulo));
@@ -114,9 +114,11 @@ public class PanelGame extends JPanel implements Runnable{
             y += yVelo;
         }
 
-        if(x2 >= 0){
-            x2++;
-
+        if(x2 <= 0){
+            x2 -=  10;
+            if(x2 == -500){
+                x2 = 0;
+            }
         }
 
         //System.out.println(tempoDeJogo);
