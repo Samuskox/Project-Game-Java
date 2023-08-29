@@ -33,10 +33,11 @@ public class PanelGame extends JPanel implements Runnable{
     
 
     Image robo ;
+    Image predios;
 
     PanelGame(){
         this.setSize(700,500);
-        //this.setBackground(Color.PINK);
+        
         this.addMouseListener(mouse);
         this.setDoubleBuffered(true);
         this.addMouseMotionListener(mouse);
@@ -48,6 +49,12 @@ public class PanelGame extends JPanel implements Runnable{
             robo = ImageIO.read(getClass().getResourceAsStream("Player.png"));
         } catch (IOException e) {
         }
+
+        try {
+            predios = ImageIO.read(getClass().getResourceAsStream("background.png"));
+        } catch (IOException e) {
+        }
+
     }
 
     //Thread gameThread;
@@ -55,7 +62,6 @@ public class PanelGame extends JPanel implements Runnable{
     //    gameThread = new Thread(this);
     //    gameThread.start();
     //}
-
 
     //Aqui no run() onde tudo que vai ocorrer milisegundo por milisegundo
     @Override
@@ -79,14 +85,15 @@ public class PanelGame extends JPanel implements Runnable{
 
         super.paint(g);
       Graphics2D g2D = (Graphics2D) g;
+      g2D.drawImage(predios,x2,0, null);
       
       g2D.setColor(Color.pink);
-      //g2D.translate(50, 50);
+      //g2D.translate(x2, y2);
       
-        g2D.rotate(-angulo2);
+    //g2D.rotate((vaiPralaX - x) - (vaiPralaY - y));
       
       
-      g2D.fillArc(x, y, 50, 50, x, y);
+      g2D.fillArc(x, y, 50, 50, (int)((x - vaiPralaX) + (y - vaiPralaY)),50);
       //g2D.rotate(0.77);
       
       
@@ -96,30 +103,22 @@ public class PanelGame extends JPanel implements Runnable{
     }
 
     public void update(){
-        angulo2 = (float)Math.atan2((y),(x+32)) ;
-        
-        
-
         if(mouse.click){
-
+            angulo2 = (float) Math.atan2(vaiPralaY + y,vaiPralaX + x) ;
             vaiPralaX = mouse.xizinho - 32;
             vaiPralaY = mouse.ypsilinho - 2;
             angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
-            xVelo = (float) ((10)*Math.cos(angulo));
-            yVelo = (float) ((10)*Math.sin(angulo));
+            xVelo = (float) ((8)*Math.cos(angulo));
+            yVelo = (float) ((8 )*Math.sin(angulo));
             x += xVelo;
             y += yVelo;
         }
-            
-        
-               
-       
-            
-        
-        
 
-     
-        
+        if(x2 >= 0){
+            x2++;
+
+        }
+
         //System.out.println(tempoDeJogo);
         tempoDeJogo++;
         if(tempoDeJogo > 60){
