@@ -130,8 +130,8 @@ public class PanelGame extends JPanel implements Runnable{
     }
 
     public void update(){
-        vaiPralaX = mouse.xizinho - 32;
-        vaiPralaY = mouse.ypsilinho - 2;
+        vaiPralaX = mouse.xizinho ;
+        vaiPralaY = mouse.ypsilinho - 80;
 
         //float iadmo =(x - vaiPralaX) + (y - vaiPralaY);
         //System.out.println(iadmo);
