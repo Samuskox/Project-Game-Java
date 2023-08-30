@@ -32,12 +32,13 @@ public class PanelGame extends JPanel implements Runnable{
     float angulo2;
     
 
-    Image robo ;
-    //Image predios;
-
+    Image robo;
+    Image predios1;
     Image fundo1;
     Image fundo2;
     Image fundo3;
+
+    int arcAng;
 
 
     PanelGame(){
@@ -55,10 +56,10 @@ public class PanelGame extends JPanel implements Runnable{
         } catch (IOException e) {
         }
 
-        //try {
-        //    predios = ImageIO.read(getClass().getResourceAsStream("background.png"));
-        //} catch (IOException e) {
-        //}
+        try {
+            predios1 = ImageIO.read(getClass().getResourceAsStream("predios1.png"));
+        } catch (IOException e) {
+        }
 
         try {
             fundo1 = ImageIO.read(getClass().getResourceAsStream("background1.png"));
@@ -101,6 +102,7 @@ public class PanelGame extends JPanel implements Runnable{
     int vx1 = 0;
     int vx2 = 0;
     int vx3 = 0;
+    int vx4 = 0;
 
     public void paint(Graphics g){
 
@@ -113,6 +115,7 @@ public class PanelGame extends JPanel implements Runnable{
      g2D.drawImage(fundo1, vx1, 0, null);
      g2D.drawImage(fundo2, vx2, 0, null);
      g2D.drawImage(fundo3, vx3, 0, null);
+     //g2D.drawImage(predios1, vx4, 0,null);
       
       g2D.setColor(Color.pink);
       //g2D.translate(x, y);
@@ -120,7 +123,7 @@ public class PanelGame extends JPanel implements Runnable{
     //g2D.rotate(0.2);
       
       
-      g2D.fillArc(x, y, 80, 80, (int)((x-vaiPralaX)+(vaiPralaY-y)),50);
+      g2D.fillArc(x, y, 80, 80,(int)((x-vaiPralaX)+(vaiPralaY-y)) ,20);
       //g2D.rotate(0.77);
       
       
@@ -130,8 +133,14 @@ public class PanelGame extends JPanel implements Runnable{
     }
 
     public void update(){
-        vaiPralaX = mouse.xizinho ;
-        vaiPralaY = mouse.ypsilinho - 80;
+        
+        arcAng = (int)((x-vaiPralaX)-(vaiPralaY-y));
+        if(tempoDeJogo == 60){
+             System.out.println(arcAng);
+        }
+       
+        vaiPralaX = mouse.xizinho - 40;
+        vaiPralaY = mouse.ypsilinho - 40;
 
         //float iadmo =(x - vaiPralaX) + (y - vaiPralaY);
         //System.out.println(iadmo);
@@ -153,24 +162,32 @@ public class PanelGame extends JPanel implements Runnable{
 
         if(vx1 <= 0){
             vx1--;
-            if(vx1 <= -500){
+            if(vx1 <= -700){
                 vx1 = 0;
             }
         }
 
         if(vx2 <= 0){
             vx2 -= 2;
-            if(vx2 <= -500){
+            if(vx2 <= -700){
                 vx2 = 0;
             }
         }
 
         if(vx3 <= 0){
-            vx3 -= 5;
-            if(vx3 <= -500){
+            vx3 -= 8;
+            if(vx3 <= -700){
                 vx3 = 0;
             }
         }
+
+        //if(vx4 <= 0){
+        //    vx4 -= 5;
+        //    if(vx4 <= -700){
+        //        vx4 = 0;
+        //    }
+        //}
+
 
 
 

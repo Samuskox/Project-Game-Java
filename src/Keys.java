@@ -68,7 +68,7 @@ public class Keys implements MouseListener, MouseMotionListener{
 
         
 
-        System.out.println("TO MOVENDO AQUI PORA: X: "+xizinho+" Y: "+ypsilinho);
+        //System.out.println("TO MOVENDO AQUI PORA: X: "+xizinho+" Y: "+ypsilinho);
 
        
     }
