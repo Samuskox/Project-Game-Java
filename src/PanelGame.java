@@ -30,6 +30,7 @@ public class PanelGame extends JPanel implements Runnable{
     float angulo;
     float cooldown;
     float angulo2;
+    int angulo3;
     
 
     Image robo;
@@ -38,7 +39,9 @@ public class PanelGame extends JPanel implements Runnable{
     Image fundo2;
     Image fundo3;
 
-    int arcAng;
+    float arcAng;
+
+    float samuel;
 
 
     PanelGame(){
@@ -98,7 +101,7 @@ public class PanelGame extends JPanel implements Runnable{
 
      
     }
-
+    //velocidade dos fundos (camadas)
     int vx1 = 0;
     int vx2 = 0;
     int vx3 = 0;
@@ -109,57 +112,60 @@ public class PanelGame extends JPanel implements Runnable{
         
 
         super.paint(g);
-      Graphics2D g2D = (Graphics2D) g;
-     // g2D.drawImage(predios,x2,0, null);
-
+        Graphics2D g2D = (Graphics2D) g;
      g2D.drawImage(fundo1, vx1, 0, null);
      g2D.drawImage(fundo2, vx2, 0, null);
      g2D.drawImage(fundo3, vx3, 0, null);
      //g2D.drawImage(predios1, vx4, 0,null);
-      
-      g2D.setColor(Color.pink);
+    
+     g2D.translate(vaiPralaX + 40, vaiPralaY +40);
+      g2D.rotate(samuel); 
       //g2D.translate(x, y);
+    
+      g2D.setColor(Color.pink);
+     g2D.fillRect(0, 0, 80, 80);
+
+    // g2D.translate(x, y);
+    // g2D.rotate(1);
+    
+    
       
-    //g2D.rotate(0.2);
+    //g2D.rotate(arcAng);
+      //g2D.fillArc(x, y, 80, 80, ,50);
+      //g2D.fillOval(x, y, 40, 40);
       
       
-      g2D.fillArc(x, y, 80, 80,(int)((x-vaiPralaX)+(vaiPralaY-y)) ,20);
-      //g2D.rotate(0.77);
-      
-      
-      //g2D.drawImage(robo,x,y,null);
+    //   g2D.drawImage(robo,x+32,y+32,null);
       //g2D.fillRect(x, y, 20, 80);
       g2D.dispose();
     }
 
     public void update(){
         
-        arcAng = (int)((x-vaiPralaX)-(vaiPralaY-y));
+        //arcAng = ((x-vaiPralaX)+(vaiPralaY-y));
+        
         if(tempoDeJogo == 60){
-             System.out.println(arcAng);
+            //  System.out.println(arcAng);
         }
        
         vaiPralaX = mouse.xizinho - 40;
         vaiPralaY = mouse.ypsilinho - 40;
 
         //float iadmo =(x - vaiPralaX) + (y - vaiPralaY);
-        //System.out.println(iadmo);
-        if(mouse.click){
-            angulo2 = (float) Math.atan2(vaiPralaY + y,vaiPralaX + x) ;
-            angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
-            xVelo = (float) ((7.5)*Math.cos(angulo));
-            yVelo = (float) ((7.5)*Math.sin(angulo));
-            x += xVelo;
-            y += yVelo;
-        }
+       // System.out.println(iadmo);
+         if(mouse.click){
+             angulo2 = (float) Math.atan2(vaiPralaY + y,vaiPralaX + x) ;
+             angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
+             xVelo = (float) ((7.5)*Math.cos(angulo));
+             yVelo = (float) ((7.5)*Math.sin(angulo));
+             x += xVelo;
+             y += yVelo;
+         }
 
-        //if(x2 <= 0){
-        //    x2 -=  10;
-        //    if(x2 == -500){
-        //        x2 = 0;
-        //    }
-        //}
+        samuel = (float) Math.atan2(vaiPralaY - 40, vaiPralaX - 40);
 
+        
+                
         if(vx1 <= 0){
             vx1--;
             if(vx1 <= -700){
