@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 public class PanelGame extends JPanel implements Runnable{
 
     Keys mouse = new Keys();
+    Fundo fundo = new Fundo();
     
 
     boolean run = true;
@@ -34,10 +35,7 @@ public class PanelGame extends JPanel implements Runnable{
     
 
     Image robo;
-    Image predios1;
-    Image fundo1;
-    Image fundo2;
-    Image fundo3;
+    
 
     float arcAng;
 
@@ -59,23 +57,7 @@ public class PanelGame extends JPanel implements Runnable{
         } catch (IOException e) {
         }
 
-        try {
-            predios1 = ImageIO.read(getClass().getResourceAsStream("predios1.png"));
-        } catch (IOException e) {
-        }
-
-        try {
-            fundo1 = ImageIO.read(getClass().getResourceAsStream("background1.png"));
-        } catch (IOException e) {
-        }
-        try {
-            fundo2 = ImageIO.read(getClass().getResourceAsStream("background2.png"));
-        } catch (IOException e) {
-        }
-        try {
-            fundo3 = ImageIO.read(getClass().getResourceAsStream("background3.png"));
-        } catch (IOException e) {
-        }
+        
 
 
     }
@@ -101,37 +83,25 @@ public class PanelGame extends JPanel implements Runnable{
 
      
     }
-    //velocidade dos fundos (camadas)
-    int vx1 = 0;
-    int vx2 = 0;
-    int vx3 = 0;
-    int vx4 = 0;
+
 
     public void paint(Graphics g){
-
-        
-
         super.paint(g);
         Graphics2D g2D = (Graphics2D) g;
-     g2D.drawImage(fundo1, vx1, 0, null);
-     g2D.drawImage(fundo2, vx2, 0, null);
-     g2D.drawImage(fundo3, vx3, 0, null);
-     //g2D.drawImage(predios1, vx4, 0,null);
-    
-     g2D.translate(vaiPralaX + 40, vaiPralaY +40);
-      g2D.rotate(samuel); 
-      //g2D.translate(x, y);
-    
-      g2D.setColor(Color.pink);
-     g2D.fillRect(0, 0, 80, 80);
 
+        fundo.paint(g2D);
+     
+     
+    
+    g2D.translate(vaiPralaX,vaiPralaY);
+      //g2D.rotate(samuel); 
+      //g2D.translate(x, y);
+      g2D.setColor(Color.pink);
+     //g2D.fillRect(0, 0, 80, 80);
     // g2D.translate(x, y);
     // g2D.rotate(1);
-    
-    
-      
     //g2D.rotate(arcAng);
-      //g2D.fillArc(x, y, 80, 80, ,50);
+      g2D.fillArc(x, y, 80, 80, (int)((x-vaiPralaX)+(vaiPralaY-y)),50);
       //g2D.fillOval(x, y, 40, 40);
       
       
@@ -151,9 +121,9 @@ public class PanelGame extends JPanel implements Runnable{
         vaiPralaX = mouse.xizinho - 40;
         vaiPralaY = mouse.ypsilinho - 40;
 
-        //float iadmo =(x - vaiPralaX) + (y - vaiPralaY);
-       // System.out.println(iadmo);
-         if(mouse.click){
+        float iadmo =(x - vaiPralaX) + (y - vaiPralaY);
+        System.out.println(iadmo);
+        if(mouse.click){
              angulo2 = (float) Math.atan2(vaiPralaY + y,vaiPralaX + x) ;
              angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
              xVelo = (float) ((7.5)*Math.cos(angulo));
@@ -166,24 +136,24 @@ public class PanelGame extends JPanel implements Runnable{
 
         
                 
-        if(vx1 <= 0){
-            vx1--;
-            if(vx1 <= -700){
-                vx1 = 0;
+        if(fundo.vx1 <= 0){
+            fundo.vx1--;
+            if(fundo.vx1 <= -700){
+                fundo.vx1 = 0;
             }
         }
 
-        if(vx2 <= 0){
-            vx2 -= 2;
-            if(vx2 <= -700){
-                vx2 = 0;
+        if(fundo.vx2 <= 0){
+            fundo.vx2 -= 2;
+            if(fundo.vx2 <= -700){
+                fundo.vx2 = 0;
             }
         }
 
-        if(vx3 <= 0){
-            vx3 -= 8;
-            if(vx3 <= -700){
-                vx3 = 0;
+        if(fundo.vx3 <= 0){
+            fundo.vx3 -= 8;
+            if(fundo.vx3 <= -700){
+                fundo.vx3 = 0;
             }
         }
 

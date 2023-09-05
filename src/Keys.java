@@ -1,7 +1,7 @@
 import org.w3c.dom.events.MouseEvent;
 import java.awt.event.*;
 
-public class Keys implements MouseListener, MouseMotionListener{
+public class Keys implements MouseListener, MouseMotionListener, KeyListener{
 
     float xizinho;
     float ypsilinho;
@@ -71,6 +71,30 @@ public class Keys implements MouseListener, MouseMotionListener{
         //System.out.println("TO MOVENDO AQUI PORA: X: "+xizinho+" Y: "+ypsilinho);
 
        
+    }
+
+
+
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+
+
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        
+    }
+
+
+
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
     }
 
 
