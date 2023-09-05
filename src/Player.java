@@ -46,6 +46,8 @@ public class Player {
             if(rectangle.intersects(mouse.rectangle)){
                xVelo =0;
                yVelo =0;
+               
+               System.out.println("DESVIA O MênO");
            }
             x += xVelo;
             y += yVelo;
