@@ -39,12 +39,31 @@ public class Fundo {
     public void paintBackground(Graphics2D g){
         
     g.drawImage(fundo1, vx1, 0, null);
-     g.drawImage(fundo2, vx2, 0, null);
-     g.drawImage(fundo3, vx3, 0, null);
+    g.drawImage(fundo2, vx2, 0, null);
+    g.drawImage(fundo3, vx3, 0, null);
     }
 
     public void update(){
-        
+        if(vx1 <= 0){
+            vx1--;
+            if(vx1 <= -700){
+                vx1 = 0;
+            }
+        }
+
+        if(vx2 <= 0){
+            vx2 -= 2;
+            if(vx2 <= -700){
+                vx2 = 0;
+            }
+        }
+
+        if(vx3 <= 0){
+            vx3 -= 8;
+            if(vx3 <= -700){
+                vx3 = 0;
+            }
+        }
     }
     
 

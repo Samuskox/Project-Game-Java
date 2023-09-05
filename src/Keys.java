@@ -1,11 +1,15 @@
 import org.w3c.dom.events.MouseEvent;
 import java.awt.event.*;
+import java.awt.Rectangle;
+import java.awt.Graphics2D;
 
 public class Keys implements MouseListener, MouseMotionListener, KeyListener{
 
     float xizinho;
     float ypsilinho;
-    boolean click;
+    boolean moved;
+
+    Rectangle rectangle = new Rectangle((int)xizinho, (int)ypsilinho, 3, 3);
 
     @Override
     public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -28,7 +32,7 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
 
     @Override
     public void mouseReleased(java.awt.event.MouseEvent e) {
-        click =false;
+        moved =false;
 
     }
 
@@ -63,7 +67,7 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
     public void mouseMoved(java.awt.event.MouseEvent e) {
         xizinho = e.getX();
         ypsilinho = e.getY();
-        click = true;
+        moved = true;
         //System.out.println("TO MOVENDO AQUI PORA: X: "+xizinho+" Y: "+ypsilinho);
     }
 
@@ -89,6 +93,11 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
     @Override
     public void keyReleased(KeyEvent e) {
         
+    }
+
+    public void pintar(Graphics2D a){
+        rectangle = new Rectangle((int)xizinho - 3, (int)ypsilinho - 3, 6, 6);
+        a.draw(rectangle);
     }
 
 
