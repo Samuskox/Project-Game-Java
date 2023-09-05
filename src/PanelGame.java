@@ -13,6 +13,7 @@ public class PanelGame extends JPanel implements Runnable{
 
     Keys mouse = new Keys();
     Fundo fundo = new Fundo();
+    Enemy inimigo = new Enemy();
     
 
     boolean run = true;
@@ -73,7 +74,7 @@ public class PanelGame extends JPanel implements Runnable{
     public void run() {
         while(run){
             try {
-                Thread.sleep(17);
+                Thread.sleep(16);
             } catch (InterruptedException e) {
             }
 
@@ -88,17 +89,15 @@ public class PanelGame extends JPanel implements Runnable{
     public void paint(Graphics g){
         super.paint(g);
         Graphics2D g2D = (Graphics2D) g;
+        fundo.paintBackground(g2D);
+        inimigo.drawEnemy(g2D);
 
-        fundo.paint(g2D);
-     
-     
-    
+
     g2D.translate(vaiPralaX,vaiPralaY);
       //g2D.rotate(samuel); 
       //g2D.translate(x, y);
       g2D.setColor(Color.pink);
      //g2D.fillRect(0, 0, 80, 80);
-    // g2D.translate(x, y);
     // g2D.rotate(1);
     //g2D.rotate(arcAng);
       g2D.fillArc(x, y, 80, 80, (int)((x-vaiPralaX)+(vaiPralaY-y)),50);
@@ -111,31 +110,7 @@ public class PanelGame extends JPanel implements Runnable{
     }
 
     public void update(){
-        
-        //arcAng = ((x-vaiPralaX)+(vaiPralaY-y));
-        
-        if(tempoDeJogo == 60){
-            //  System.out.println(arcAng);
-        }
-       
-        vaiPralaX = mouse.xizinho - 40;
-        vaiPralaY = mouse.ypsilinho - 40;
 
-        float iadmo =(x - vaiPralaX) + (y - vaiPralaY);
-        System.out.println(iadmo);
-        if(mouse.click){
-             angulo2 = (float) Math.atan2(vaiPralaY + y,vaiPralaX + x) ;
-             angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
-             xVelo = (float) ((7.5)*Math.cos(angulo));
-             yVelo = (float) ((7.5)*Math.sin(angulo));
-             x += xVelo;
-             y += yVelo;
-         }
-
-        samuel = (float) Math.atan2(vaiPralaY - 40, vaiPralaX - 40);
-
-        
-                
         if(fundo.vx1 <= 0){
             fundo.vx1--;
             if(fundo.vx1 <= -700){
@@ -156,6 +131,26 @@ public class PanelGame extends JPanel implements Runnable{
                 fundo.vx3 = 0;
             }
         }
+       
+        vaiPralaX = mouse.xizinho - 40;
+        vaiPralaY = mouse.ypsilinho - 40;
+
+        float iadmo =(x - vaiPralaX) + (y - vaiPralaY);
+        System.out.println(iadmo);
+        if(mouse.click){
+             angulo2 = (float) Math.atan2(vaiPralaY + y,vaiPralaX + x) ;
+             angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
+             xVelo = (float) ((7.5)*Math.cos(angulo));
+             yVelo = (float) ((7.5)*Math.sin(angulo));
+             x += xVelo;
+             y += yVelo;
+         }
+
+        samuel = (float) Math.atan2(vaiPralaY - 40, vaiPralaX - 40);
+
+        
+                
+        
 
         //if(vx4 <= 0){
         //    vx4 -= 5;

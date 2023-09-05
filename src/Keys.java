@@ -64,13 +64,7 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
         xizinho = e.getX();
         ypsilinho = e.getY();
         click = true;
-        //click = true;
-
-        
-
         //System.out.println("TO MOVENDO AQUI PORA: X: "+xizinho+" Y: "+ypsilinho);
-
-       
     }
 
 

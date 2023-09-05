@@ -36,11 +36,15 @@ public class Fundo {
         }
     }
 
-    public void paint(Graphics2D g){
+    public void paintBackground(Graphics2D g){
         
     g.drawImage(fundo1, vx1, 0, null);
      g.drawImage(fundo2, vx2, 0, null);
      g.drawImage(fundo3, vx3, 0, null);
+    }
+
+    public void update(){
+        
     }
     
 
