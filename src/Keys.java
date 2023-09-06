@@ -9,14 +9,17 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
     float xizinho;
     float ypsilinho;
     boolean moved;
-    boolean clicked = false;
+    boolean clicked;
+    int click;
 
     Rectangle rectangle = new Rectangle((int)xizinho, (int)ypsilinho, 3, 3);
 
     @Override
     public void mouseClicked(java.awt.event.MouseEvent e) {
-       clicked = true;
-        System.out.println("oi clickei");
+
+        click = e.MOUSE_CLICKED;
+        clicked = true;
+        System.out.println(click);
         System.out.println("X: "+xizinho+"Y:"+ypsilinho);
 
        

@@ -88,7 +88,7 @@ public class PanelGame extends JPanel implements Runnable{
         //    }
         //}
 
-        
+        System.out.println(mouse.click);
 
         fundo.update();
         inimigo.update(player);
