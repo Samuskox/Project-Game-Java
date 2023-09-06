@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.IOException;
 
-public class Fundo {
+public class Background {
     Image predios1;
     Image fundo1;
     Image fundo2;
@@ -16,7 +16,7 @@ public class Fundo {
     int vx3 = 0;
     int vx4 = 0;
 
-    Fundo(){
+    Background(){
          try {
             predios1 = ImageIO.read(getClass().getResourceAsStream("predios1.png"));
         } catch (IOException e) {

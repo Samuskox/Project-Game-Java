@@ -3,19 +3,22 @@ import java.awt.event.*;
 import java.awt.Rectangle;
 import java.awt.Graphics2D;
 
+
 public class Keys implements MouseListener, MouseMotionListener, KeyListener{
 
     float xizinho;
     float ypsilinho;
     boolean moved;
+    boolean clicked = false;
 
     Rectangle rectangle = new Rectangle((int)xizinho, (int)ypsilinho, 3, 3);
 
     @Override
     public void mouseClicked(java.awt.event.MouseEvent e) {
-       
-        //System.out.println("oi clickei");
+       clicked = true;
+        System.out.println("oi clickei");
         System.out.println("X: "+xizinho+"Y:"+ypsilinho);
+
        
     }
 
@@ -32,8 +35,8 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
 
     @Override
     public void mouseReleased(java.awt.event.MouseEvent e) {
-        moved =false;
-
+        clicked = false;
+        System.out.println(clicked);
     }
 
 

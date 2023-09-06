@@ -13,9 +13,11 @@ import javax.swing.JPanel;
 public class PanelGame extends JPanel implements Runnable{
 
     Keys mouse = new Keys();
-    Fundo fundo = new Fundo();
+    Background fundo = new Background();
     Enemy inimigo = new Enemy();
     Player player = new Player();
+    Bullet balas = new Bullet();
+
     //ArrayList<Enemy> listinha = new ArrayList<Enemy>();
     boolean run = true;
     int tempoDeJogo = 0;
@@ -59,9 +61,13 @@ public class PanelGame extends JPanel implements Runnable{
         fundo.paintBackground(g2D);
         inimigo.drawEnemy(g2D);
         mouse.pintar(g2D);
+        if(mouse.clicked){
+            balas.paintBullet(g2D);
+        }
+        
         player.paintPlayer(g2D);
 
-      g2D.setColor(Color.pink);
+      //g2D.setColor(Color.pink);
      
       g2D.dispose();
     }
@@ -86,6 +92,7 @@ public class PanelGame extends JPanel implements Runnable{
 
         fundo.update();
         inimigo.update(player);
+        balas.update(player, mouse);
         player.update(mouse);
        
 
