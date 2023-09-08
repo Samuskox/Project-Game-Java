@@ -26,10 +26,14 @@ public class Bullet {
 
     public void update(Player player, Keys mouse){
 
+
+
         if(mouse.click == 500){
+            xBullet = player.x + 32;
+            yBullet = player.y + 32;
             angulo = (float) Math.atan2(mouse.ypsilinho - player.y,mouse.xizinho - player.x);
-            xVeloBullet = (float) (5*Math.cos(angulo));
-            yVeloBullet = (float)(5*Math.sin(angulo));
+            xVeloBullet = (float) (15*Math.cos(angulo));
+            yVeloBullet = (float)(15*Math.sin(angulo));
             
             mouse.click = 0;
         }
