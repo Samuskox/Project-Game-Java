@@ -32,7 +32,6 @@ public class Enemy {
         if(xEnemy > -100){
             xEnemy-= 10;
         }
-
         if(xEnemy <= -100){
             xEnemy = 700;
         }
@@ -40,10 +39,5 @@ public class Enemy {
         yveloEnemy = (float) ((3)*Math.sin(angulo));
         
         yEnemy += yveloEnemy;
-
-
-
-
-
     }
 }

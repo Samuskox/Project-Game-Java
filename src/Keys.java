@@ -19,8 +19,8 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
 
         click = e.MOUSE_CLICKED;
         clicked = true;
-        System.out.println(click);
-        System.out.println("X: "+xizinho+"Y:"+ypsilinho);
+        //System.out.println(click);
+        //System.out.println("X: "+xizinho+"Y:"+ypsilinho);
 
        
     }
@@ -39,7 +39,7 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
     @Override
     public void mouseReleased(java.awt.event.MouseEvent e) {
         clicked = false;
-        System.out.println(clicked);
+        //System.out.println(clicked);
     }
 
 
