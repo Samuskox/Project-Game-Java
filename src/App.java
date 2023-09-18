@@ -8,7 +8,12 @@ import javax.swing.JPanel;
 
 public class App{
     public static void main(String[] args){
-        PanelGame window = new PanelGame();
+        FrameGame window = new FrameGame();
+        PanelGame painel = new PanelGame();
+
+        window.add(painel);
+        painel.run();
+        //painel.startGameThread();
         //JPanel quadrado = new JPanel();
         //quadrado.setBackground(Color.BLACK);
         //quadrado.setBounds(100, 50, 200, 200);
