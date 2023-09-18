@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.awt.Rectangle;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -12,26 +13,34 @@ import javax.swing.JPanel;
 
 public class PanelGame extends JPanel implements Runnable{
 
+    Random random = new Random();
+
+
+    int variation = 1;
     Keys mouse = new Keys();
     Background fundo = new Background();
-    Enemy inimigo = new Enemy();
     Player player = new Player();
-    // Bullet balas = new Bullet();
-   // ControllerBullet controladorBalas = new ControllerBullet();
 
-    // ArrayList<Bullet> numBalas = new ArrayList<Bullet>();
+
+    ArrayList<Enemy> inimigos = new ArrayList<Enemy>();
     boolean run = true;
     int tempoDeJogo = 0;
     int segundos = 0;
+    int tempoRenderEnemy = 0;
+    
+    //CringePanel cringePanel = new CringePanel();
 
     PanelGame(){
-        this.setSize(700,500);
-        
+        this.setSize(1400,900);
         this.addMouseListener(mouse);
-        this.setDoubleBuffered(true);
         this.addMouseMotionListener(mouse);
-        this.setFocusable(true);
+        //this.add(cringePanel);
+        //cringePanel.setVisible(true);
         this.setDoubleBuffered(true);
+        this.setFocusable(true);
+        //this.addKeyListener(mouse);
+        //this.addKeyListener(tecla);
+        //this.setFocusable(true);
     }
 
     //Thread gameThread;
@@ -60,11 +69,10 @@ public class PanelGame extends JPanel implements Runnable{
         super.paint(g);
         Graphics2D g2D = (Graphics2D) g;
         fundo.paintBackground(g2D);
-        inimigo.drawEnemy(g2D);
+        //inimigo.drawEnemy(g2D);
         mouse.pintar(g2D);
-        if(mouse.clicked){
-            // balas.paintBullet(g2D);
-            //controladorBalas.numBullets.add(UNDEFINED_CONDITION, balas);
+        for(int i=0; i<inimigos.size();i++){
+            inimigos.get(i).drawEnemy(g2D);
         }
         
         player.paintPlayer(g2D);
@@ -75,11 +83,19 @@ public class PanelGame extends JPanel implements Runnable{
     }
 
     public void update(){
-
-
-
-            if(player.rectangle.intersects(inimigo.rectangle)){
+            //if(player.rectangle.intersects(inimigo.rectangle)){
             //System.out.println("tomei danonin papai");
+            //}
+
+            tempoRenderEnemy++;
+            if(tempoRenderEnemy >= 120){
+                variation = random.nextInt(3)+1;
+                inimigos.add(new Enemy(variation));
+                System.out.println(variation);
+                tempoRenderEnemy = 0;
+            }
+            for(int  i = 0; i < inimigos.size(); i++){
+                inimigos.get(i).update(player);
             }
         
 
@@ -100,9 +116,9 @@ public class PanelGame extends JPanel implements Runnable{
        //System.out.println(controladorBalas.numBullets.size());
 
         fundo.update();
-        inimigo.update(player);
+        //inimigo.update(player);
         // balas.update(player, mouse);
-        player.update(mouse, inimigo);
+        player.update(mouse);
        
 
         //System.out.println(tempoDeJogo);
@@ -112,8 +128,6 @@ public class PanelGame extends JPanel implements Runnable{
             segundos++;
             //System.exit(0);
             //System.out.println(segundos);
-
-
         }
     }
 

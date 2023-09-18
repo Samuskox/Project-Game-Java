@@ -19,13 +19,8 @@ public class Player {
     int tempo;
     Rectangle rectangle = new Rectangle((int)x + 32, (int)y +32, 64, 64);
     Keys mouse = new Keys();
-    boolean oane = false;
-    Enemy enemigo;
     int countdown = 0;
     boolean invencivel = false;
-
-
-    // Bullet bullet = new Bullet();
 
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     ArrayList<Angle> angulos = new ArrayList<Angle>();
@@ -61,17 +56,16 @@ public class Player {
         
     }
 
-    public void update(Keys mouse, Enemy enemigo){
+    public void update(Keys mouse){
 
         this.mouse = mouse;
-        this.enemigo = enemigo;
+        //this.enemigo = enemigo;
 
         if(mouse.clicked){
             angulos.add(new Angle(mouse, this));
             bullets.add(new Bullet((int) x, (int) y, mouse, angulos.get(posicaoAngle)));
             posicaoAngle++;
             mouse.clicked = false;
-            //oane = true;
         }
 
         for(int i=0;i<angulos.size();i++){
@@ -119,14 +113,14 @@ public class Player {
         }
 
 
-        for(int i=0;i<bullets.size();i++){
-            if((bullets.get(i).rectangle.intersects(enemigo.rectangle)) && invencivel==false){
-                invencivel=true;
-                //System.out.println("ATIREI PORRA MORRE LOGO KARALHO");
-                enemigo.life--;
-                System.out.println(enemigo.life);
-            }
-        }
+        //for(int i=0;i<bullets.size();i++){
+        //    if((bullets.get(i).rectangle.intersects(enemigo.rectangle)) && invencivel==false){
+        //        invencivel=true;
+        //        //System.out.println("ATIREI PORRA MORRE LOGO KARALHO");
+        //        enemigo.life--;
+        //        System.out.println(enemigo.life);
+        //    }
+        //}
 
         
 

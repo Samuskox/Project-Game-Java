@@ -7,19 +7,33 @@ import java.awt.Rectangle;
 import javax.imageio.ImageIO;
 
 public class Enemy {
-    float xEnemy = 700;
-    float yEnemy = 10;
+    float xEnemy = 1500;
+    float yEnemy = 50;
     Image enemy;
     Rectangle rectangle = new Rectangle((int)xEnemy, (int)yEnemy, 64, 64);
     float angulo;
     float yveloEnemy;
     int life = 5;
+    int variacao;
 
-    Enemy(){
-        try {
-            enemy = ImageIO.read(getClass().getResourceAsStream("/assets/inimigo.png"));
-        } catch (IOException e) {
+    Enemy(int variacao){
+        if(variacao == 1){
+            try {
+                enemy = ImageIO.read(getClass().getResourceAsStream("/assets/inimigo.png"));
+            } catch (IOException e) {
+            }
+        } else if(variacao == 2){
+            try {
+                enemy = ImageIO.read(getClass().getResourceAsStream("/assets/inimigo1.png"));
+            } catch (IOException e) {
+            }
+        } else if(variacao == 3){
+            try {
+                enemy = ImageIO.read(getClass().getResourceAsStream("/assets/inimigo2.png"));
+            } catch (IOException e) {
+            } 
         }
+       
     }
 
     public void drawEnemy(Graphics2D g){
@@ -34,7 +48,7 @@ public class Enemy {
             xEnemy-= 10;
         }
         if(xEnemy <= -100){
-            xEnemy = 700;
+            xEnemy = 1500;
         }
         angulo = (float)(Math.atan2(player.y - yEnemy,player.x - xEnemy));
         yveloEnemy = (float) ((3)*Math.sin(angulo));

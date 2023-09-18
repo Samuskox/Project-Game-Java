@@ -31,6 +31,7 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
     @Override
     public void mousePressed(java.awt.event.MouseEvent e) {
         clicked = true;
+        //System.out.println("fdzlkamk");
     }
 
 
@@ -65,10 +66,6 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
     public void mouseDragged(java.awt.event.MouseEvent e) {
 
     }
-
-
-
-
     @Override
     public void mouseMoved(java.awt.event.MouseEvent e) {
         xizinho = e.getX();
@@ -77,12 +74,18 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
         //System.out.println("TO MOVENDO AQUI PORA: X: "+xizinho+" Y: "+ypsilinho);
     }
 
+    public void pintar(Graphics2D a){
+        rectangle = new Rectangle((int)xizinho - 25, (int)ypsilinho - 25, 50, 50);
+        a.draw(rectangle);
+    }
+
 
 
 
     @Override
     public void keyTyped(KeyEvent e) {
-        
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
     }
 
 
@@ -90,7 +93,8 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
     }
 
 
@@ -98,13 +102,12 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
     }
 
-    public void pintar(Graphics2D a){
-        rectangle = new Rectangle((int)xizinho - 25, (int)ypsilinho - 25, 50, 50);
-        a.draw(rectangle);
-    }
+
+
 
 
 
