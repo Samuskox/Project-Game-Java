@@ -69,7 +69,7 @@ public class Background {
         }
 
         if(vx4 <= 0){
-            vx4 -= 50;
+            vx4 -= 30;
             if(vx4 <= -700){
                 vx4 = 0;
             }

@@ -119,7 +119,7 @@ public class Player {
 
         if(TelaTecla2.teclas.space == true){
             timerDash++;
-            System.out.println(timerDash);
+            //System.out.println(timerDash);
             acelerarX = 15;
             acelerarY = 15;
             if(timerDash == 70){
@@ -127,7 +127,7 @@ public class Player {
                 acelerarY = 5;
                 timerDash = 0;
                 System.out.println(acelerarX+" "+acelerarY);
-                teclas.space = false;
+                TelaTecla2.teclas.space = false;
             }
         }
         //System.out.println(acelerarX+" "+acelerarY);
