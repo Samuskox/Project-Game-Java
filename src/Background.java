@@ -43,6 +43,7 @@ public class Background {
     g.drawImage(fundo1, vx1, 0, null);
     g.drawImage(fundo2, vx2, 0, null);
     g.drawImage(fundo3, vx3, 0, null);
+    g.drawImage(predios1, vx4, 0, null);
     }
 
     public void update(){
@@ -64,6 +65,13 @@ public class Background {
             vx3 -= 8;
             if(vx3 <= -700){
                 vx3 = 0;
+            }
+        }
+
+        if(vx4 <= 0){
+            vx4 -= 50;
+            if(vx4 <= -700){
+                vx4 = 0;
             }
         }
     }

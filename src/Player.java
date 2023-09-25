@@ -2,6 +2,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.awt.Rectangle;
 
@@ -25,7 +26,7 @@ public class Player {
     int countdown = 0;
     boolean invencivel = false;
     int timerDash;
-
+    FrameGame TelaTecla2 = new FrameGame();
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     ArrayList<Angle> angulos = new ArrayList<Angle>();
 
@@ -35,7 +36,7 @@ public class Player {
             robo = ImageIO.read(getClass().getResourceAsStream("/assets/Player.png"));
         } catch (IOException e) {
         }
-
+        TelaTecla2.setVisible(false);
     }
 
     public void paintPlayer(Graphics2D g){
@@ -98,18 +99,7 @@ public class Player {
         vaiPralaX = mouse.xizinho - 32;
         vaiPralaY = mouse.ypsilinho - 32;
 
-        if(teclas.space == true){
-                System.out.println("dfiua");
-                timerDash++;
-                xVelo += 30;
-                yVelo += 30;
-                
-                if(timerDash == 30){
-                    System.out.println("adfiujn");
-                    teclas.space = false;
-                }
-                
-            }
+        
         
         if(mouse.moved){
             angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
@@ -120,8 +110,6 @@ public class Player {
                yVelo =0;
                //System.out.println("DESVIA O Menô");
             }
-
-            
             
 
             x += xVelo;
@@ -129,7 +117,19 @@ public class Player {
         }
 
 
-        
+        if(TelaTecla2.teclas.space == true){
+            timerDash++;
+            System.out.println(timerDash);
+            acelerarX = 15;
+            acelerarY = 15;
+            if(timerDash == 70){
+                acelerarX = 5;
+                acelerarY = 5;
+                timerDash = 0;
+                System.out.println(acelerarX+" "+acelerarY);
+                teclas.space = false;
+            }
+        }
         //System.out.println(acelerarX+" "+acelerarY);
         //System.out.println(teclas.space);
         

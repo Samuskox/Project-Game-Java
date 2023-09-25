@@ -20,7 +20,6 @@ public class Bullet {
     Mouse mouse;
     Angle Angulo;
     Rectangle rectangle = new Rectangle((int)xBullet, (int)yBullet, 10, 5);
-    // Player player = new Player();
 
     Bullet(int x, int y, Mouse mouse, Angle Angulo){
         this.Angulo = Angulo;

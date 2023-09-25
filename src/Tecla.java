@@ -16,8 +16,7 @@ public class Tecla implements KeyListener{
         int code = e.getKeyCode();
         if(code == KeyEvent.VK_SPACE){
             space = true;
-            //System.out.println("akjd");
-            //System.out.println(space);
+            System.out.println(space);
         }
         //System.out.println(space);
     }
@@ -27,6 +26,7 @@ public class Tecla implements KeyListener{
         //int code = e.getKeyCode();
         //if(code == KeyEvent.VK_SPACE){
         //    space = false;
+        //    System.out.println(space);
         //}
     }
     
