@@ -13,10 +13,7 @@ public class App{
 
         window.add(painel);
         painel.run();
-        //painel.startGameThread();
-        //JPanel quadrado = new JPanel();
-        //quadrado.setBackground(Color.BLACK);
-        //quadrado.setBounds(100, 50, 200, 200);
+
 
     }
 

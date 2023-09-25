@@ -1,14 +1,7 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-import java.awt.Rectangle;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class PanelGame extends JPanel implements Runnable{
@@ -17,10 +10,9 @@ public class PanelGame extends JPanel implements Runnable{
 
 
     int variation = 1;
-    Keys mouse = new Keys();
+    Mouse mouse = new Mouse();
     Background fundo = new Background();
     Player player = new Player();
-
 
     ArrayList<Enemy> inimigos = new ArrayList<Enemy>();
     boolean run = true;
@@ -29,6 +21,7 @@ public class PanelGame extends JPanel implements Runnable{
     int tempoRenderEnemy = 0;
     
     //CringePanel cringePanel = new CringePanel();
+    FrameGame cosinha = new FrameGame();
 
     PanelGame(){
         this.setSize(1400,900);
@@ -38,7 +31,6 @@ public class PanelGame extends JPanel implements Runnable{
         //cringePanel.setVisible(true);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
-        //this.addKeyListener(mouse);
         //this.addKeyListener(tecla);
         //this.setFocusable(true);
     }
@@ -73,20 +65,15 @@ public class PanelGame extends JPanel implements Runnable{
         mouse.pintar(g2D);
         for(int i=0; i<inimigos.size();i++){
             inimigos.get(i).drawEnemy(g2D);
-        }
-        
+        }    
         player.paintPlayer(g2D);
-
-      //g2D.setColor(Color.pink);
-     
-      g2D.dispose();
+        g2D.dispose();
     }
 
     public void update(){
             //if(player.rectangle.intersects(inimigo.rectangle)){
             //System.out.println("tomei danonin papai");
             //}
-
             tempoRenderEnemy++;
             if(tempoRenderEnemy >= 120){
                 variation = random.nextInt(3)+1;
@@ -97,11 +84,11 @@ public class PanelGame extends JPanel implements Runnable{
             for(int  i = 0; i < inimigos.size(); i++){
                 inimigos.get(i).update(player);
             }
-        
 
-        
+            cosinha.setVisible(false);
+            //System.out.println(cosinha.teclas.space);
+            //System.out.println(cosinha.teclas.code);
 
-        
         //if(timer == 0 ){
             //if(rectangle.intersects(inimigo.rectangle)){
            //     System.out.println("kRLPORRA tomei danonhinho");
@@ -116,8 +103,6 @@ public class PanelGame extends JPanel implements Runnable{
        //System.out.println(controladorBalas.numBullets.size());
 
         fundo.update();
-        //inimigo.update(player);
-        // balas.update(player, mouse);
         player.update(mouse);
        
 

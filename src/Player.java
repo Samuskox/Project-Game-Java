@@ -7,6 +7,8 @@ import java.awt.Rectangle;
 
 
 public class Player {
+    float acelerarX = 5;
+    float acelerarY = 5;
     float x = 0;
     float y = 0;
     float vaiPralaX = 200;
@@ -18,9 +20,11 @@ public class Player {
     int posicaoAngle = 0;
     int tempo;
     Rectangle rectangle = new Rectangle((int)x + 32, (int)y +32, 64, 64);
-    Keys mouse = new Keys();
+    Mouse mouse = new Mouse();
+    Tecla teclas = new Tecla();
     int countdown = 0;
     boolean invencivel = false;
+    int timerDash;
 
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     ArrayList<Angle> angulos = new ArrayList<Angle>();
@@ -56,10 +60,10 @@ public class Player {
         
     }
 
-    public void update(Keys mouse){
-
+    public void update(Mouse mouse){
         this.mouse = mouse;
-        //this.enemigo = enemigo;
+
+        
 
         if(mouse.clicked){
             angulos.add(new Angle(mouse, this));
@@ -88,21 +92,49 @@ public class Player {
             }
         }
 
+
+        /* VELOCIDADE DO PERSONAGEM + MOVIMENTAÇÂO COM MOUSE */
         rectangle = new Rectangle((int)x, (int)y, 64, 64);
         vaiPralaX = mouse.xizinho - 32;
         vaiPralaY = mouse.ypsilinho - 32;
+
+        if(teclas.space == true){
+                System.out.println("dfiua");
+                timerDash++;
+                xVelo += 30;
+                yVelo += 30;
+                
+                if(timerDash == 30){
+                    System.out.println("adfiujn");
+                    teclas.space = false;
+                }
+                
+            }
+        
         if(mouse.moved){
             angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
-            xVelo = (float) ((4)*Math.cos(angulo));
-            yVelo = (float) ((4)*Math.sin(angulo));
+            xVelo = (float) ((acelerarX)*Math.cos(angulo));
+            yVelo = (float) ((acelerarY)*Math.sin(angulo));
             if(rectangle.intersects(mouse.rectangle)){
                xVelo =0;
                yVelo =0;
                //System.out.println("DESVIA O Menô");
             }
+
+            
+            
+
             x += xVelo;
             y += yVelo;
         }
+
+
+        
+        //System.out.println(acelerarX+" "+acelerarY);
+        //System.out.println(teclas.space);
+        
+
+        /* cooldown de dano de inimigo em relação ao persogangem */
 
         if(invencivel == true){
             tempo++;

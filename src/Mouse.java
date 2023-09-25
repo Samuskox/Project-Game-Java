@@ -1,28 +1,22 @@
-import org.w3c.dom.events.MouseEvent;
 import java.awt.event.*;
 import java.awt.Rectangle;
 import java.awt.Graphics2D;
 
 
-public class Keys implements MouseListener, MouseMotionListener, KeyListener{
+public class Mouse implements MouseListener, MouseMotionListener{
 
     float xizinho;
     float ypsilinho;
     boolean moved;
     boolean clicked;
-    int click;
+    
 
     Rectangle rectangle = new Rectangle((int)xizinho, (int)ypsilinho, 3, 3);
 
     @Override
-    public void mouseClicked(java.awt.event.MouseEvent e) {
-
-        click = e.MOUSE_CLICKED;
-        
+    public void mouseClicked(java.awt.event.MouseEvent e) {   
         //System.out.println(click);
-        //System.out.println("X: "+xizinho+"Y:"+ypsilinho);
-
-       
+        //System.out.println("X: "+xizinho+"Y:"+ypsilinho);  
     }
 
 
@@ -78,37 +72,4 @@ public class Keys implements MouseListener, MouseMotionListener, KeyListener{
         rectangle = new Rectangle((int)xizinho - 25, (int)ypsilinho - 25, 50, 50);
         a.draw(rectangle);
     }
-
-
-
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
-    }
-
-
-
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
-    }
-
-
-
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
-    }
-
-
-
-
-
-
 }

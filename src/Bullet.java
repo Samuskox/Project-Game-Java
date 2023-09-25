@@ -9,8 +9,6 @@ import java.awt.Graphics2D;
 
 
 public class Bullet {
-
-    
     float xBullet;
     float yBullet;
     float xVeloBullet;
@@ -19,12 +17,12 @@ public class Bullet {
     int x;
     int y;
 
-    Keys mouse;
+    Mouse mouse;
     Angle Angulo;
     Rectangle rectangle = new Rectangle((int)xBullet, (int)yBullet, 10, 5);
     // Player player = new Player();
 
-    Bullet(int x, int y, Keys mouse, Angle Angulo){
+    Bullet(int x, int y, Mouse mouse, Angle Angulo){
         this.Angulo = Angulo;
         this.mouse = mouse;
         this.x = x;
