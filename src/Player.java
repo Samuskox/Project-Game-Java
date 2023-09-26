@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.imageio.ImageIO;
@@ -18,12 +19,10 @@ public class Player {
     float xVelo;
     float yVelo;
     double girar = 0;
-    int posicaoAngle = 0;
     int tempo;
     Rectangle rectangle = new Rectangle((int)x + 32, (int)y +32, 64, 64);
     Mouse mouse = new Mouse();
     Tecla teclas = new Tecla();
-    int countdown = 0;
     boolean invencivel = false;
     int timerDash;
     FrameGame TelaTecla2 = new FrameGame();
@@ -40,67 +39,35 @@ public class Player {
     }
 
     public void paintPlayer(Graphics2D g){
-
-        for(int  i = 0; i < bullets.size(); i++){
-            bullets.get(i).paintBullet(g);
-            //System.out.println(i);
-        }
        g.rotate(girar, x+32, y+32);
        if(mouse.xizinho > x){
         girar+=0.075;
        } else {
         girar-=0.075;
        }
-       
         g.drawImage(robo, (int)x,(int)y, 64,64, null);
         g.draw(rectangle);
-
-        
         g.rotate(-girar, x+32, y+32);
-
-        
+        if(mouse.xizinho > x){
+            g.rotate(0.075, x + 32, y + 32);
+           } else {
+            g.rotate(-0.075, x + 32, y + 32);
+        }
     }
 
     public void update(Mouse mouse){
         this.mouse = mouse;
-
-        
-
-        if(mouse.clicked){
-            angulos.add(new Angle(mouse, this));
-            bullets.add(new Bullet((int) x, (int) y, mouse, angulos.get(posicaoAngle)));
-            posicaoAngle++;
-            mouse.clicked = false;
-        }
+        rectangle = new Rectangle((int)x, (int)y, 64, 64);
 
         for(int i=0;i<angulos.size();i++){
             //System.out.println(angulos.get(i).angulo);
         }
 
-        for(int  i = 0; i < bullets.size(); i++){
-            bullets.get(i).update();
-        }
-
-        if(bullets.size() >= 1){
-            countdown++;
-            if(countdown >= 120){
-                for(int i = 0; i < bullets.size(); i++){
-                    bullets.remove(i);
-                    angulos.remove(i);
-                    posicaoAngle--;
-                }
-                countdown = 0;
-            }
-        }
 
 
-        /* VELOCIDADE DO PERSONAGEM + MOVIMENTAÇÂO COM MOUSE */
-        rectangle = new Rectangle((int)x, (int)y, 64, 64);
+        /* VELOCIDADE DO PERSONAGEM + MOVIMENTAÇÂO COM MOUSE */   
         vaiPralaX = mouse.xizinho - 32;
         vaiPralaY = mouse.ypsilinho - 32;
-
-        
-        
         if(mouse.moved){
             angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
             xVelo = (float) ((acelerarX)*Math.cos(angulo));
@@ -110,19 +77,17 @@ public class Player {
                yVelo =0;
                //System.out.println("DESVIA O Menô");
             }
-            
-
             x += xVelo;
             y += yVelo;
         }
 
-
+            /* HABILIDADE DASH DO PERSONAGEM */
         if(TelaTecla2.teclas.space == true){
             timerDash++;
             //System.out.println(timerDash);
-            acelerarX = 15;
-            acelerarY = 15;
-            if(timerDash == 70){
+            acelerarX = 22;
+            acelerarY = 22;
+            if(timerDash == 30){
                 acelerarX = 5;
                 acelerarY = 5;
                 timerDash = 0;
@@ -130,13 +95,12 @@ public class Player {
                 TelaTecla2.teclas.space = false;
             }
         }
-        //System.out.println(acelerarX+" "+acelerarY);
-        //System.out.println(teclas.space);
         
 
         /* cooldown de dano de inimigo em relação ao persogangem */
 
         if(invencivel == true){
+            
             tempo++;
             if(tempo>=30){
                 invencivel=false;

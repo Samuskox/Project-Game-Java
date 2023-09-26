@@ -35,30 +35,13 @@ public class Bullet {
     }
 
     public void update(){
-        rectangle = new Rectangle((int)xBullet, (int)yBullet, 10, 5);
-
-        //x = (int)player.x;
-        //y = (int)player.y;
-
-        // if(mouse.click == 500){
-
-            
+        rectangle = new Rectangle((int)xBullet, (int)yBullet, 10, 5);        
             xBullet = x + 32;
             yBullet = y + 32;
-            //Angulo.angulo = (float) Math.atan2(mouse.ypsilinho - y,mouse.xizinho - x);
             xVeloBullet = (float) (15*Math.cos(Angulo.angulo));
             yVeloBullet = (float)(15*Math.sin(Angulo.angulo));
-            
-            // mouse.click = 0;
-        // }
-
-        //xBullet += xVeloBullet;
-        //yBullet += yVeloBullet;
         x += xVeloBullet;
         y += yVeloBullet;
-
-        //System.out.println(Angulo.angulo);
-
 
     }
 }

@@ -8,15 +8,18 @@ import javax.imageio.ImageIO;
 
 public class Enemy {
     float xEnemy = 1500;
-    float yEnemy = 50;
+    float yEnemy;
     Image enemy;
     Rectangle rectangle = new Rectangle((int)xEnemy, (int)yEnemy, 64, 64);
     float angulo;
     float yveloEnemy;
     int life = 5;
     int variacao;
+    boolean vala = false;
 
-    Enemy(int variacao){
+    Enemy(int variacao, float yEnemy){
+        this.yEnemy = yEnemy;
+        System.out.println(yEnemy);
         if(variacao == 1){
             try {
                 enemy = ImageIO.read(getClass().getResourceAsStream("/assets/inimigo.png"));
@@ -49,10 +52,12 @@ public class Enemy {
         }
         if(xEnemy <= -100){
             xEnemy = 1500;
+            vala = true;
         }
         angulo = (float)(Math.atan2(player.y - yEnemy,player.x - xEnemy));
         yveloEnemy = (float) ((3)*Math.sin(angulo));
         
         yEnemy += yveloEnemy;
+
     }
 }
