@@ -6,44 +6,29 @@ import javax.swing.JPanel;
 
 public class PanelGame extends JPanel implements Runnable{
 
-    Random random = new Random();
 
-    GameScreen gameScreen = new GameScreen();
-
-    float Yenemy;
-    int variation = 1;
     Mouse mouse = new Mouse();
-    Background fundo = new Background();
-    Player player = new Player();
-
-    ArrayList<Enemy> inimigos = new ArrayList<Enemy>();
-    ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-    ArrayList<Angle> angulos = new ArrayList<Angle>();
-    int posicaoAngle = 0;
-    int countdown = 0;
-
-    boolean powPowLiberado = true;
-    int bulletDelay = 0;
-    boolean run = true;
-    int tempoDeJogo = 0;
-    int segundos = 0;
-    int tempoRenderEnemy = 0;
-    int tempoInvencivel =0;
-
     FrameGame cosinha = new FrameGame();
+    GameScreen gameScreen = new GameScreen();
+    boolean run =true;
+    TitleScreen menu = new TitleScreen();
 
     PanelGame(){
         this.setSize(1400,900);
         this.addMouseListener(mouse);
         this.addMouseMotionListener(mouse);
         //this.add(cringePanel);
-        //cringePanel.setVisible(true);
+        //cringePanel.sejh juyuyyuuuyuy
         this.add(gameScreen);
+        gameScreen.setVisible(false);
+        this.add(menu);
+        menu.setVisible(true);
         this.setVisible(true);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         //this.addKeyListener(tecla);
         //this.setFocusable(true);
+        
     }
 
     //Thread gameThread;
@@ -60,6 +45,7 @@ public class PanelGame extends JPanel implements Runnable{
                 Thread.sleep(16);
             } catch (InterruptedException e) {
             }
+            
             repaint();
             update();
         }
@@ -71,106 +57,33 @@ public class PanelGame extends JPanel implements Runnable{
     public void paint(Graphics g){
         super.paint(g);
         Graphics2D g2D = (Graphics2D) g;
-        fundo.paintBackground(g2D);
-        mouse.pintar(g2D);
-        player.paintPlayer(g2D);
-
-        for(int i=0; i<inimigos.size();i++){
-            inimigos.get(i).drawEnemy(g2D);
-        }    
-
-        for(int  i = 0; i < bullets.size(); i++){
-            bullets.get(i).paintBullet(g2D);
-            //System.out.println(i);
+        if(menu.aparecer == false){
+            gameScreen.paint(g2D);
+            gameScreen.setVisible(true);
+            menu.setVisible(false);
+        } else {
+            menu.paint(g2D);
         }
 
         g2D.dispose();
     }
 
     public void update(){
-        cosinha.setVisible(false);
-        fundo.update();
-        player.update(mouse);
 
-        /* renderização de inimigos */
-            tempoRenderEnemy++;
-            if(tempoRenderEnemy >= 120){
-                Yenemy = random.nextFloat(800)+1;
-                variation = random.nextInt(3)+1;
-                inimigos.add(new Enemy(variation, Yenemy));
-                // System.out.println(variation);
-                tempoRenderEnemy = 0;
-            }
-            for(int  i = 0; i < inimigos.size(); i++){
-                inimigos.get(i).update(player);
-            }
+        // if(menu.aparecer == true){
+        //     //System.out.println("junim a mãe ta presa");
+        //     menu.update();
+        // } else{
+            cosinha.setVisible(false);
+            gameScreen.update(this);
+        // }
 
-            /* ATIRAR + RENDERIZAÇÂO DAS BALAS*/
-            if(mouse.clicked && powPowLiberado){
-                angulos.add(new Angle(mouse, player));
-                bullets.add(new Bullet((int) player.x, (int) player.y, mouse, angulos.get(posicaoAngle)));
-                posicaoAngle++;
-                mouse.clicked = false;
-                powPowLiberado = false;
-
-            }
-            if(powPowLiberado == false){
-                bulletDelay++;
-                if(bulletDelay >=10){
-                    powPowLiberado = true;
-                    bulletDelay =0;
-                }
-            }
-            for(int  i = 0; i < bullets.size(); i++){
-                bullets.get(i).update();
-            }
-            if(bullets.size() >= 1){
-                countdown++;
-                if(countdown >= 120){
-                    for(int i = 0; i < bullets.size(); i++){
-                        bullets.remove(i);
-                        angulos.remove(i);
-                        posicaoAngle--;
-                    }
-                    countdown = 0;
-                }
-            }
-
-            
-
-
-            /* INVENCIBILIDADE */
-        if(tempoInvencivel == 0 ){
-            for(int i=0;i<inimigos.size();i++){
-                if(player.rectangle.intersects(inimigos.get(i).rectangle)){
-                    System.out.println("kRLPORRA tomei danonhinho");
-                   tempoInvencivel++; 
-                }
-            }
+        if(menu.aparecer == false){
+            gameScreen.setVisible(true);
+            menu.setVisible(false);
         } else {
-            tempoInvencivel++;
-            if(tempoInvencivel >= 60){
-                tempoInvencivel = 0;
-            }
+
         }
-
-
-        /* INIMIGA PA VALA */
-       for(int i=0;i<inimigos.size();i++){
-        if(inimigos.get(i).vala == true){
-            inimigos.remove(i);
-        }
-       }
-
-        //System.out.println(tempoInvencivel);
-        tempoDeJogo++;
-        if(tempoDeJogo == 60){
-            tempoDeJogo = 0;
-            segundos++;
-            //System.exit(0);
-            //System.out.println(segundos);
-            }
-        
 
 
     }
