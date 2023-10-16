@@ -25,9 +25,12 @@ public class Player {
     Tecla teclas = new Tecla();
     boolean invencivel = false;
     int timerDash;
-    FrameGame TelaTecla2 = new FrameGame();
+    //FrameGame TelaTecla2 = new FrameGame();
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     ArrayList<Angle> angulos = new ArrayList<Angle>();
+
+    int LifeX = 100;
+
 
     Image robo;
     Player(){
@@ -35,7 +38,7 @@ public class Player {
             robo = ImageIO.read(getClass().getResourceAsStream("/assets/Player.png"));
         } catch (IOException e) {
         }
-        TelaTecla2.setVisible(false);
+        //TelaTecla2.setVisible(false);
     }
 
     public void paintPlayer(Graphics2D g){
@@ -53,10 +56,15 @@ public class Player {
            } else {
             g.rotate(-0.075, x + 32, y + 32);
         }
+        g.setColor(Color.RED);
+        g.fillRect(10, 10, 100*2, 50);
+        g.setColor(Color.BLUE);
+        g.fillRect(10, 10, LifeX*2, 50);
     }
 
-    public void update(Mouse mouse){
+    public void update(Mouse mouse, Tecla tecla){
         this.mouse = mouse;
+        this.teclas = tecla;
         rectangle = new Rectangle((int)x, (int)y, 64, 64);
 
         for(int i=0;i<angulos.size();i++){
@@ -82,17 +90,17 @@ public class Player {
         }
 
             /* HABILIDADE DASH DO PERSONAGEM */
-        if(TelaTecla2.teclas.space == true){
+        if(tecla.space == true){
             timerDash++;
-            //System.out.println(timerDash);
+            System.out.println(timerDash);
             acelerarX = 22;
             acelerarY = 22;
-            if(timerDash == 30){
+            if(timerDash == 15){
                 acelerarX = 5;
                 acelerarY = 5;
                 timerDash = 0;
                 System.out.println(acelerarX+" "+acelerarY);
-                TelaTecla2.teclas.space = false;
+                tecla.space = false;
             }
         }
         
@@ -100,7 +108,6 @@ public class Player {
         /* cooldown de dano de inimigo em relação ao persogangem */
 
         if(invencivel == true){
-            
             tempo++;
             if(tempo>=30){
                 invencivel=false;

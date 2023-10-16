@@ -14,6 +14,7 @@ import org.w3c.dom.events.MouseEvent;
 public class TitleScreen extends JPanel implements ActionListener{
     boolean aparecer = true;
     JButton botao;
+    JButton botao2;
 
     TitleScreen(){
         botao = new JButton();
@@ -22,12 +23,21 @@ public class TitleScreen extends JPanel implements ActionListener{
         botao.addActionListener(this);
         botao.setText("Iniciar");
 
+        botao2 = new JButton();
+        botao2.setBackground(Color.white);
+        botao2.setBounds(400, 500, 500, 100);
+        botao2.addActionListener(this);
+        botao2.setText("fechar");
+
+
+
 
         this.setBounds(0, 0, 1400, 900);
         this.setBackground(Color.BLUE);
         this.setVisible(true);
         this.setOpaque(true);
         this.add(botao);
+        this.add(botao2);
     }
 
     
@@ -39,6 +49,9 @@ public class TitleScreen extends JPanel implements ActionListener{
         if(e.getSource()==botao){
             aparecer=false;
             this.setVisible(aparecer);
+        }
+        if(e.getSource() == botao2){
+            System.exit(0);
         }
     }
 

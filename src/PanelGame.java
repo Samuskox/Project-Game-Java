@@ -24,6 +24,7 @@ public class PanelGame extends JPanel implements Runnable{
         this.setVisible(true);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
+        this.addKeyListener(cosinha.teclas);
     }
 
     //Thread gameThread;

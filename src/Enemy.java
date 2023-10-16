@@ -13,13 +13,13 @@ public class Enemy {
     Rectangle rectangle = new Rectangle((int)xEnemy, (int)yEnemy, 64, 64);
     float angulo;
     float yveloEnemy;
-    int life = 5;
+    int life = 1;
     int variacao;
     boolean vala = false;
 
     Enemy(int variacao, float yEnemy){
         this.yEnemy = yEnemy;
-        System.out.println(yEnemy);
+        //System.out.println(yEnemy);
         if(variacao == 1){
             try {
                 enemy = ImageIO.read(getClass().getResourceAsStream("/assets/inimigo.png"));
@@ -58,6 +58,7 @@ public class Enemy {
         yveloEnemy = (float) ((3)*Math.sin(angulo));
         
         yEnemy += yveloEnemy;
+
 
     }
 }

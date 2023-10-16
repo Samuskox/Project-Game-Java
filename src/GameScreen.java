@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import java.awt.Graphics;
@@ -31,11 +32,15 @@ public class GameScreen extends JPanel{
     int tempoDeJogo = 0;
     int segundos = 0;
     int tempoRenderEnemy = 0;
+    int tempoRenderEnemyCoolDown = 120;
     int tempoInvencivel =0;
+
+    int pontos;
+
 
     GameScreen(){
         this.setSize(1400, 900);
-        this.setBackground(Color.PINK);
+        //this.setBackground(Color.PINK);
         this.setOpaque(true);
     }
 
@@ -52,6 +57,8 @@ public class GameScreen extends JPanel{
         for(int  i = 0; i < bullets.size(); i++){
             bullets.get(i).paintBullet(g2D);
         }
+        g2D.setFont(new Font("MV Boli", Font.PLAIN, 50));
+        g2D.drawString("Pontos: "+pontos, 950, 61);
     }
 
     public void update(PanelGame panelGame){
@@ -60,11 +67,11 @@ public class GameScreen extends JPanel{
         this.mouse = panelGame.mouse;
 
         fundo.update();
-        player.update(panelGame.mouse);
+        player.update(panelGame.mouse, panelGame.cosinha.teclas);
 
         /* renderização de inimigos */
             tempoRenderEnemy++;
-            if(tempoRenderEnemy >= 120){
+            if(tempoRenderEnemy >= 1){
                 Yenemy = random.nextFloat(800)+1;
                 variation = random.nextInt(3)+1;
                 inimigos.add(new Enemy(variation, Yenemy));
@@ -74,7 +81,7 @@ public class GameScreen extends JPanel{
                 inimigos.get(i).update(player);
             }
 
-            /* ATIRAR + RENDERIZAÇÂO DAS BALAS*/
+            /* ATIRAR + RENDERIZAÇÂO DAS BALAS */
             if(mouse.clicked && powPowLiberado){
                 angulos.add(new Angle(mouse, player));
                 bullets.add(new Bullet((int) player.x, (int) player.y, mouse, angulos.get(posicaoAngle)));
@@ -105,15 +112,33 @@ public class GameScreen extends JPanel{
                 }
             }
 
+            /* dano de bala ao inimigo */
             
+
+            //System.out.println(bullets.size());
+            if(bullets.size() > 0){
+                for(int i = 0; i<bullets.size() ;i++){
+                    for(int j = 0; j<inimigos.size();j++){
+                        if(bullets.get(i).rectangle.intersects(inimigos.get(j).rectangle)){
+                            //System.out.println(inimigos.get(j).life);
+                            inimigos.get(j).life--;
+                            //.out.println(inimigos.get(j).life);
+                            bullets.remove(i);
+                            pontos += 10;
+                            break;
+                        }
+                    }
+                }
+            }
 
 
             /* INVENCIBILIDADE */
         if(tempoInvencivel == 0 ){
             for(int i=0;i<inimigos.size();i++){
-                if(player.rectangle.intersects(inimigos.get(i).rectangle)){
-                    System.out.println("kRLPORRA tomei danonhinho");
-                   tempoInvencivel++; 
+                if(player.rectangle.intersects(inimigos.get(i).rectangle) && tempoInvencivel == 0){
+                    tempoInvencivel++;
+                    //System.out.println("TOMEI DANONINHO");
+                    player.LifeX -= 5;
                 }
             }
         } else {
@@ -124,9 +149,12 @@ public class GameScreen extends JPanel{
         }
 
 
-        /* INIMIGO DESAPARECER*/
+        /* INIMIGO DESAPARECER */
        for(int i=0;i<inimigos.size();i++){
         if(inimigos.get(i).vala == true){
+            inimigos.remove(i);
+        }
+        if(inimigos.get(i).life <= 0){
             inimigos.remove(i);
         }
        }
@@ -139,6 +167,9 @@ public class GameScreen extends JPanel{
             //System.exit(0);
             //System.out.println(segundos);
             }
+        if(segundos%10 == 0){
+            tempoRenderEnemyCoolDown -= 10;
+        }
         
     }
 

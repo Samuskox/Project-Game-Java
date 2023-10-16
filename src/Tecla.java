@@ -4,7 +4,7 @@ public class Tecla implements KeyListener{
     Boolean space = false;
     @Override 
     public void keyTyped(KeyEvent e) {
-        int code = e.getKeyCode();
+        //int code = e.getKeyCode();
         //System.out.println(space);
         //if(code == KeyEvent.VK_SPACE){
         //    space = true;
@@ -16,7 +16,7 @@ public class Tecla implements KeyListener{
         int code = e.getKeyCode();
         if(code == KeyEvent.VK_SPACE){
             space = true;
-            System.out.println(space);
+            //System.out.println(space);
         }
     }
 
