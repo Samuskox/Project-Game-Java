@@ -17,18 +17,13 @@ public class PanelGame extends JPanel implements Runnable{
         this.setSize(1400,900);
         this.addMouseListener(mouse);
         this.addMouseMotionListener(mouse);
-        //this.add(cringePanel);
-        //cringePanel.sejh juyuyyuuuyuy
-        this.add(gameScreen);
-        gameScreen.setVisible(false);
+        cosinha.setVisible(false);
         this.add(menu);
-        menu.setVisible(true);
+        this.add(gameScreen);
+        //gameScreen.setVisible(false);
         this.setVisible(true);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
-        //this.addKeyListener(tecla);
-        //this.setFocusable(true);
-        
     }
 
     //Thread gameThread;
@@ -60,31 +55,21 @@ public class PanelGame extends JPanel implements Runnable{
         if(menu.aparecer == false){
             gameScreen.paint(g2D);
             gameScreen.setVisible(true);
-            menu.setVisible(false);
+            g2D.dispose();
         } else {
-            menu.paint(g2D);
+            
         }
 
-        g2D.dispose();
     }
 
     public void update(){
-
-        // if(menu.aparecer == true){
-        //     //System.out.println("junim a mãe ta presa");
-        //     menu.update();
-        // } else{
-            cosinha.setVisible(false);
-            gameScreen.update(this);
-        // }
-
         if(menu.aparecer == false){
-            gameScreen.setVisible(true);
-            menu.setVisible(false);
+            gameScreen.update(this);
         } else {
 
         }
-
+            
+            
 
     }
 }

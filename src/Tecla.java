@@ -18,7 +18,6 @@ public class Tecla implements KeyListener{
             space = true;
             System.out.println(space);
         }
-        //System.out.println(space);
     }
 
     @Override

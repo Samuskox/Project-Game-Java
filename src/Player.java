@@ -46,7 +46,7 @@ public class Player {
         girar-=0.075;
        }
         g.drawImage(robo, (int)x,(int)y, 64,64, null);
-        g.draw(rectangle);
+        //g.draw(rectangle);
         g.rotate(-girar, x+32, y+32);
         if(mouse.xizinho > x){
             g.rotate(0.075, x + 32, y + 32);

@@ -17,31 +17,28 @@ public class TitleScreen extends JPanel implements ActionListener{
 
     TitleScreen(){
         botao = new JButton();
-        botao.setBackground(Color.GREEN);
-        botao.setBounds(50, 50, 100, 50);
+        botao.setBackground(Color.white);
+        botao.setBounds(400, 350, 500, 100);
         botao.addActionListener(this);
-        botao.setText("KKK joga logo");
+        botao.setText("Iniciar");
+
 
         this.setBounds(0, 0, 1400, 900);
-        //this.setSize(1400,900);
-        this.setBackground(Color.blue);
+        this.setBackground(Color.BLUE);
         this.setVisible(true);
         this.setOpaque(true);
         this.add(botao);
     }
 
-    public void update(){
-        System.out.println("wtf");
-    }
+    
 
-    public void paint(Graphics2D g2){
-        // g2.setBackground(Color.BLUE);
-    }
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==botao){
-            aparecer=true;
+            aparecer=false;
+            this.setVisible(aparecer);
         }
     }
 

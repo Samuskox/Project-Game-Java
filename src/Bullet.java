@@ -31,7 +31,7 @@ public class Bullet {
 
     public void paintBullet(Graphics2D g){   
             g.fillRect((int)xBullet,(int)yBullet, 10, 5);
-            g.draw(rectangle);
+            //g.draw(rectangle);
     }
 
     public void update(){

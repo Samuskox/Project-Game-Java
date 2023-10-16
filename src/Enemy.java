@@ -42,7 +42,7 @@ public class Enemy {
     public void drawEnemy(Graphics2D g){
         g.drawImage(enemy, (int)xEnemy, (int)yEnemy, 64, 64, null);
         g.setColor(Color.BLUE);
-        g.draw(rectangle);
+        //g.draw(rectangle);
     }
 
     public void update(Player player){

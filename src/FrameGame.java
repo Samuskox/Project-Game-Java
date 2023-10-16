@@ -4,11 +4,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class FrameGame extends JFrame{
-
-
-
-    //JLabel quadradoAmbulante;
-
     static Tecla teclas = new Tecla();
 
     public FrameGame(){
@@ -18,6 +13,7 @@ public class FrameGame extends JFrame{
         this.setTitle("Olá Mundo, robôs querem pegar lixo");
         this.setLocationRelativeTo(null);
         this.addKeyListener(teclas);
+        this.setResizable(false);
         //this.setLayout(null);
     }
 }

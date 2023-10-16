@@ -35,8 +35,8 @@ public class GameScreen extends JPanel{
 
     GameScreen(){
         this.setSize(1400, 900);
-        // this.setBackground(Color.PINK);
-        // this.setOpaque(true);
+        this.setBackground(Color.PINK);
+        this.setOpaque(true);
     }
 
     public void paint(Graphics2D g2D){
@@ -51,12 +51,11 @@ public class GameScreen extends JPanel{
 
         for(int  i = 0; i < bullets.size(); i++){
             bullets.get(i).paintBullet(g2D);
-            //System.out.println(i);
         }
     }
 
     public void update(PanelGame panelGame){
-        //System.out.println("PAO COM MORTADELA");
+        
 
         this.mouse = panelGame.mouse;
 
@@ -69,7 +68,6 @@ public class GameScreen extends JPanel{
                 Yenemy = random.nextFloat(800)+1;
                 variation = random.nextInt(3)+1;
                 inimigos.add(new Enemy(variation, Yenemy));
-                // System.out.println(variation);
                 tempoRenderEnemy = 0;
             }
             for(int  i = 0; i < inimigos.size(); i++){

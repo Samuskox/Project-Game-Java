@@ -70,6 +70,6 @@ public class Mouse implements MouseListener, MouseMotionListener{
 
     public void pintar(Graphics2D a){
         rectangle = new Rectangle((int)xizinho - 25, (int)ypsilinho - 25, 50, 50);
-        a.draw(rectangle);
+        //a.draw(rectangle);
     }
 }
