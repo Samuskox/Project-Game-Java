@@ -23,7 +23,7 @@ public class Item {
 
 
     public void paint(Graphics2D g){
-        g.draw(rectangle);
+        //g.draw(rectangle);
         g.drawImage(RaioCura, x, y, 50,50,null);
     }
 
