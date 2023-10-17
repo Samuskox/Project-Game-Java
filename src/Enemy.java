@@ -17,8 +17,9 @@ public class Enemy {
     int variacao;
     boolean vala = false;
 
-    Enemy(int variacao, float yEnemy){
+    Enemy(int variacao, float yEnemy, float xEnemy){
         this.yEnemy = yEnemy;
+        this.xEnemy = xEnemy;
         //System.out.println(yEnemy);
         if(variacao == 1){
             try {

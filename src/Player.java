@@ -58,7 +58,7 @@ public class Player {
         }
         g.setColor(Color.RED);
         g.fillRect(10, 10, 100*2, 50);
-        g.setColor(Color.BLUE);
+        g.setColor(new Color(131, 137, 222));
         g.fillRect(10, 10, LifeX*2, 50);
     }
 
@@ -114,6 +114,8 @@ public class Player {
                 tempo = 0;
             }
         }
+
+       
 
 
         //for(int i=0;i<bullets.size();i++){

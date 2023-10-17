@@ -3,7 +3,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JPanel;
@@ -15,6 +15,7 @@ public class GameScreen extends JPanel{
    
 
     float Yenemy;
+    float Xenemy;
     int variation = 1;
    
     Background fundo = new Background();
@@ -23,6 +24,8 @@ public class GameScreen extends JPanel{
     ArrayList<Enemy> inimigos = new ArrayList<Enemy>();
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     ArrayList<Angle> angulos = new ArrayList<Angle>();
+    ArrayList<Item> item = new ArrayList<Item>();
+
     int posicaoAngle = 0;
     int countdown = 0;
 
@@ -36,7 +39,7 @@ public class GameScreen extends JPanel{
     int tempoInvencivel =0;
 
     int pontos;
-
+    int num;
 
     GameScreen(){
         this.setSize(1400, 900);
@@ -57,6 +60,11 @@ public class GameScreen extends JPanel{
         for(int  i = 0; i < bullets.size(); i++){
             bullets.get(i).paintBullet(g2D);
         }
+
+        for(int i=0;i<item.size();i++){
+            item.get(i).paint(g2D);
+        }
+        g2D.setColor(new Color(131, 137, 222));
         g2D.setFont(new Font("MV Boli", Font.PLAIN, 50));
         g2D.drawString("Pontos: "+pontos, 950, 61);
     }
@@ -73,8 +81,10 @@ public class GameScreen extends JPanel{
             tempoRenderEnemy++;
             if(tempoRenderEnemy >= 120){
                 Yenemy = random.nextFloat(800)+1;
+                Xenemy = random.nextFloat(1400)+1400;
+                System.out.println(Xenemy);
                 variation = random.nextInt(3)+1;
-                inimigos.add(new Enemy(variation, Yenemy));
+                inimigos.add(new Enemy(variation, Yenemy, Xenemy));
                 EnemyWave();
                 tempoRenderEnemy = 0;
             }
@@ -154,8 +164,24 @@ public class GameScreen extends JPanel{
             inimigos.remove(i);
         }
         if(inimigos.get(i).life <= 0){
+            num = random.nextInt(5)+1;
+            //System.out.println("oi: "+num);
+            if(num == 5){
+                item.add(new Item((int)inimigos.get(i).xEnemy, (int)inimigos.get(i).yEnemy));
+            }
             inimigos.remove(i);
         }
+       }
+
+       for(int i=0;i<item.size();i++){
+        item.get(i).update();
+        if(player.LifeX < 100){
+            if(item.get(i).rectangle.intersects(player.rectangle)){
+                player.LifeX += 10;
+                item.remove(i);
+            }
+        }
+        
        }
 
         //System.out.println(tempoInvencivel);
@@ -173,11 +199,11 @@ public class GameScreen extends JPanel{
     }
 
     public void EnemyWave(){
-        inimigos.add(new Enemy(2, 800));
-        inimigos.add(new Enemy(1, 600));
-        inimigos.add(new Enemy(2, 400));
-        inimigos.add(new Enemy(3, 300));
-        inimigos.add(new Enemy(1, 100));
+        inimigos.add(new Enemy(2, 800, 1800));
+        inimigos.add(new Enemy(1, 600,1950));
+        inimigos.add(new Enemy(2, 400, 1960));
+        inimigos.add(new Enemy(3, 300, 1900));
+        inimigos.add(new Enemy(1, 100, 1500));
     }
 
 }
