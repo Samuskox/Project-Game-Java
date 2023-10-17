@@ -71,10 +71,11 @@ public class GameScreen extends JPanel{
 
         /* renderização de inimigos */
             tempoRenderEnemy++;
-            if(tempoRenderEnemy >= 1){
+            if(tempoRenderEnemy >= 120){
                 Yenemy = random.nextFloat(800)+1;
                 variation = random.nextInt(3)+1;
                 inimigos.add(new Enemy(variation, Yenemy));
+                EnemyWave();
                 tempoRenderEnemy = 0;
             }
             for(int  i = 0; i < inimigos.size(); i++){
@@ -113,8 +114,6 @@ public class GameScreen extends JPanel{
             }
 
             /* dano de bala ao inimigo */
-            
-
             //System.out.println(bullets.size());
             if(bullets.size() > 0){
                 for(int i = 0; i<bullets.size() ;i++){
@@ -171,6 +170,14 @@ public class GameScreen extends JPanel{
             tempoRenderEnemyCoolDown -= 10;
         }
         
+    }
+
+    public void EnemyWave(){
+        inimigos.add(new Enemy(2, 800));
+        inimigos.add(new Enemy(1, 600));
+        inimigos.add(new Enemy(2, 400));
+        inimigos.add(new Enemy(3, 300));
+        inimigos.add(new Enemy(1, 100));
     }
 
 }

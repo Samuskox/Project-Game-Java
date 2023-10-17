@@ -55,7 +55,7 @@ public class Enemy {
             vala = true;
         }
         angulo = (float)(Math.atan2(player.y - yEnemy,player.x - xEnemy));
-        yveloEnemy = (float) ((3)*Math.sin(angulo));
+        yveloEnemy = (float) ((2)*Math.sin(angulo));
         
         yEnemy += yveloEnemy;
 
