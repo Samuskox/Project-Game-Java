@@ -22,7 +22,7 @@ public class Item {
 
         if(type == 1){
             try {
-            Item = ImageIO.read(getClass().getResourceAsStream("/assets/Raio.png"));
+            Item = ImageIO.read(getClass().getResourceAsStream("/assets/Vida.png"));
         } catch (IOException e) {
             }
         } else if(type == 2){

@@ -44,6 +44,7 @@ public class GameScreen extends JPanel{
 
     boolean fastGame = false;
     int countFastGame = 0;
+    int quantidadeEnimigo = 1;
 
 
     GameScreen(){
@@ -69,6 +70,8 @@ public class GameScreen extends JPanel{
         for(int i=0;i<item.size();i++){
             item.get(i).paint(g2D);
         }
+
+        fundo.paintBackgroundPoeira(g2D);
         g2D.setColor(new Color(131, 137, 222));
         g2D.setFont(new Font("Igor", Font.PLAIN, 50));
         g2D.drawString("Pontos: "+pontos, 1100, 61);
@@ -90,7 +93,9 @@ public class GameScreen extends JPanel{
                 //System.out.println(Xenemy);
                 variation = random.nextInt(3)+1;
                 inimigos.add(new Enemy(variation, Yenemy, Xenemy));
-                EnemyWave();
+                //EnemyWave();
+                EnemysWaves(quantidadeEnimigo);
+                quantidadeEnimigo++;
                 tempoRenderEnemy = 0;
             }
             for(int  i = 0; i < inimigos.size(); i++){
@@ -108,7 +113,7 @@ public class GameScreen extends JPanel{
             }
             if(powPowLiberado == false){
                 bulletDelay++;
-                if(bulletDelay >=10){
+                if(bulletDelay >=7){
                     powPowLiberado = true;
                     bulletDelay =0;
                 }
@@ -187,20 +192,36 @@ public class GameScreen extends JPanel{
                     player.lifeX += 10;
                 } else if((item.get(i).type == 2) && (fastGame == false)){
                     fastGame = true;
+                    player.modoRapido = true;
+                    player.modoRapidoCount = 1000;
                 } else if(item.get(i).type == 3 && player.combustivel < 100){
                     player.combustivel += 20;
                 }
                 item.remove(i);
         }
-        
        }
+
+       /* limite Combustivel */
+       if(player.combustivel > 100){
+            player.combustivel = 100;
+        }
+
+        /* remove item ao chegar embaixo da tela */
+
+        for(int i=0;i<item.size();i++){
+        if(item.get(i).y > 1000){
+            item.remove(i);
+        }
+        }
+
 
        /* MODO DE JOGO RÁPIDO */
 
        if(fastGame){
             //System.out.println("ola ativei");
             countFastGame++;
-            addpontos = 20;
+            addpontos = 50;
+            player.modoRapidoCount--;
             for(int i=0;i<inimigos.size();i++){
                 inimigos.get(i).aceleraçaoX = 20;
             }
@@ -215,7 +236,7 @@ public class GameScreen extends JPanel{
             }
        }
 
-       if(countFastGame >= 1200){
+       if(countFastGame >= 1000){
             fastGame = false;
             for(int i=0;i<inimigos.size();i++){
                 inimigos.get(i).aceleraçaoX = 10;
@@ -232,6 +253,7 @@ public class GameScreen extends JPanel{
             //System.out.println("ola desativei");
             countFastGame = 0;
             addpontos = 10;
+            player.modoRapido = false;
        }
 
        /* CONTAGEM DE JOGO */
@@ -271,6 +293,15 @@ public class GameScreen extends JPanel{
         x = random.nextFloat(1400)+1400;
         v = random.nextInt(3)+1;
         inimigos.add(new Enemy(v,y,x));
+    }
+
+    public void EnemysWaves(int quant){
+        for(int i=0; i<quant;i++){
+            float y = random.nextFloat(800)+1;
+            float x = random.nextFloat(1400)+1400;
+            int v = random.nextInt(3)+1;
+            inimigos.add(new Enemy(v,y,x));
+        }
     }
 
 }

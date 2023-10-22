@@ -39,8 +39,8 @@ public class Bullet {
         rectangle = new Rectangle((int)xBullet, (int)yBullet, 20, 10);        
             xBullet = x + 32;
             yBullet = y + 32;
-            xVeloBullet = (float) (15*Math.cos(Angulo.angulo));
-            yVeloBullet = (float)(15*Math.sin(Angulo.angulo));
+            xVeloBullet = (float) (17*Math.cos(Angulo.angulo));
+            yVeloBullet = (float)(17*Math.sin(Angulo.angulo));
         x += xVeloBullet;
         y += yVeloBullet;
 

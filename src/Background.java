@@ -11,17 +11,24 @@ public class Background {
     Image fundo1;
     Image fundo2;
     Image fundo3;
+    Image fundoPoeira;
+    Image fundoPoeira1;
+    Image Poeira;
 
     //velocidade dos fundos (camadas)
     int vx1 = 1;
     int vx2 = 2;
     int vx3 = 8;
     int vx4 = 30;
+    int vx5 = 32;
+    int vx6 = 40;
 
     int x1 = 0;
     int x2 = 0;
     int x3 = 0;
     int x4 = 0;
+    int x5 = 0;
+    int x6 = 0;
     
 
     Background(){
@@ -42,6 +49,20 @@ public class Background {
             fundo3 = ImageIO.read(getClass().getResourceAsStream("/assets/background3.png"));
         } catch (IOException e) {
         }
+        try {
+            fundoPoeira = ImageIO.read(getClass().getResourceAsStream("/assets/PoeiraBackground1.png"));
+        } catch (IOException e) {
+        }
+        try {
+            fundoPoeira1 = ImageIO.read(getClass().getResourceAsStream("/assets/PoeiraBackground2.png"));
+        } catch (IOException e) {
+        }
+
+        try {
+            Poeira = ImageIO.read(getClass().getResourceAsStream("/assets/PoeiraBackground3.png"));
+        } catch (IOException e) {
+        }
+        
     }
 
     public void paintBackground(Graphics2D g){
@@ -50,6 +71,10 @@ public class Background {
     g.drawImage(fundo2, x2, 0, null);
     g.drawImage(fundo3, x3, 0, null);
     g.drawImage(predios1, x4, 0, null);
+    g.drawImage(fundoPoeira1, x5,0, null);
+    }
+    public void paintBackgroundPoeira(Graphics2D g){
+        g.drawImage(Poeira, x6, 0,null);
     }
 
     public void update(){
@@ -80,6 +105,22 @@ public class Background {
                 x4 = 0;
             }
         }
+
+        if(x5 <= 0){
+            x5 -= vx5;
+            if(x5 <= -700){
+                x5 = 0;
+            }
+        }
+
+        if(x6 <= 0){
+            x6 -= vx6;
+            if(x6 <= -700){
+                x6 = 0;
+            }
+        }
+
+
     }
     
 

@@ -15,6 +15,7 @@ public class TitleScreen extends JPanel implements ActionListener{
     boolean aparecer = true;
     JButton botao;
     JButton botao2;
+    
 
     TitleScreen(){
         botao = new JButton();

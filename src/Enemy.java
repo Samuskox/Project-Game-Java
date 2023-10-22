@@ -50,8 +50,11 @@ public class Enemy {
     }
 
     public void drawEnemy(Graphics2D g){
+        
         g.drawImage(enemy, (int)xEnemy, (int)yEnemy, 64, 64, null);
         g.setColor(Color.BLUE);
+        g.rotate(0.075, xEnemy+32, yEnemy+32);
+        g.rotate(-0.075, xEnemy+32, yEnemy+32);
         //g.draw(rectangle);
     }
 

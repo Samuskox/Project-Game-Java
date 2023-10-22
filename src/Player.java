@@ -33,13 +33,21 @@ public class Player {
     int lifeX = 100;
     int combustivel = 100;
     boolean tirarCombustivel = false;
+
+    boolean modoRapido = false;
+    int modoRapidoCount = 0;
     
 
-
+    Image HUDrapido;
     Image robo;
     Player(){
         try {
             robo = ImageIO.read(getClass().getResourceAsStream("/assets/Player.png"));
+        } catch (IOException e) {
+        }
+
+        try {
+            HUDrapido = ImageIO.read(getClass().getResourceAsStream("/assets/HUDRAPIDO.png"));
         } catch (IOException e) {
         }
         //TelaTecla2.setVisible(false);
@@ -60,15 +68,43 @@ public class Player {
            } else {
             g.rotate(-0.075, x + 32, y + 32);
         }
-        g.setColor(Color.RED);
-        g.fillRect(10, 10, 100*2, 50);
-        g.setColor(new Color(131, 137, 222));
-        g.fillRect(10, 10, lifeX*2, 50);
 
-        g.setColor(Color.black);
-        g.drawRect(10, 70, 200,50);
-        g.setColor(Color.blue);
-        g.fillRect(10, 70, combustivel*2, 50);
+        /* HUD DA VIDA */
+        g.setColor(Color.GRAY);
+        g.fillRoundRect(10,10,300,30, 30, 30);
+        g.setColor(new Color(168, 29, 29));
+        g.fillRoundRect(10,10,lifeX*3,30, 30, 30);
+        g.setColor(new Color(211, 41, 41));
+        g.fillRoundRect(10,15,lifeX*3,20, 30, 30);
+        g.setColor(new Color(249, 79, 79));
+        g.fillRoundRect(10,20,lifeX*3,10, 30, 30);
+        g.setColor(Color.BLACK);
+        g.drawRoundRect(10, 10, 300, 30, 30, 30);
+        g.drawRoundRect(9, 10, 300, 30, 30, 30);
+
+        /* HUD DO COMBUSTIVEL */
+
+        g.setColor(Color.gray);
+        g.fillRoundRect(10,50,300,30, 30, 30);
+        //g.drawRect(10, 70, 200,50);
+        g.setColor(new Color(24,130,180));
+        g.fillRoundRect(10,50,combustivel*3,30, 30, 30);
+        g.setColor(new Color(38,173,236));
+        g.fillRoundRect(10,55,combustivel*3,20, 30, 30);
+        g.setColor(new Color(81,200,255));
+        g.fillRoundRect(10,60,combustivel*3,10, 30, 30);
+        g.setColor(Color.BLACK);
+        g.drawRoundRect(10, 50, 300, 30, 30, 30);
+        g.drawRoundRect(9, 50, 300, 30, 30, 30);
+
+        /* HUD RAPIDEZ */
+
+        if(modoRapido){
+            g.drawImage(HUDrapido, 320, 3, modoRapidoCount/10, 90, null);
+            
+        }
+
+        //g.fillRect(10, 70, combustivel*2, 50);
     }
 
     public void update(Mouse mouse, Tecla tecla){
@@ -79,6 +115,7 @@ public class Player {
         for(int i=0;i<angulos.size();i++){
             //System.out.println(angulos.get(i).angulo);
         }
+        
 
 
 
@@ -113,7 +150,7 @@ public class Player {
             timerDash++;
             
         }
-        if(timerDash == 15){
+        if(timerDash == 20){
                 acelerarX = 5;
                 acelerarY = 5;
                 timerDash = 0;
