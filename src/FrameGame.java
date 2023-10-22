@@ -14,7 +14,7 @@ public class FrameGame extends JFrame{
         this.setTitle("Ultimate Mega Trash Robot: Revolution");
         this.setLocationRelativeTo(null);
         this.addKeyListener(teclas);
-        //this.setResizable(false);
+        this.setResizable(false);
         //this.setLayout(null);
     }
 }

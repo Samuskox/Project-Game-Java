@@ -40,6 +40,11 @@ public class GameScreen extends JPanel{
 
     int pontos;
     int num;
+    int addpontos = 10;
+
+    boolean fastGame = false;
+    int countFastGame = 0;
+
 
     GameScreen(){
         this.setSize(1400, 900);
@@ -65,8 +70,8 @@ public class GameScreen extends JPanel{
             item.get(i).paint(g2D);
         }
         g2D.setColor(new Color(131, 137, 222));
-        g2D.setFont(new Font("MV Boli", Font.PLAIN, 50));
-        g2D.drawString("Pontos: "+pontos, 950, 61);
+        g2D.setFont(new Font("Igor", Font.PLAIN, 50));
+        g2D.drawString("Pontos: "+pontos, 1100, 61);
     }
 
     public void update(PanelGame panelGame){
@@ -82,7 +87,7 @@ public class GameScreen extends JPanel{
             if(tempoRenderEnemy >= 120){
                 Yenemy = random.nextFloat(800)+1;
                 Xenemy = random.nextFloat(1400)+1400;
-                System.out.println(Xenemy);
+                //System.out.println(Xenemy);
                 variation = random.nextInt(3)+1;
                 inimigos.add(new Enemy(variation, Yenemy, Xenemy));
                 EnemyWave();
@@ -147,7 +152,7 @@ public class GameScreen extends JPanel{
                 if(player.rectangle.intersects(inimigos.get(i).rectangle) && tempoInvencivel == 0){
                     tempoInvencivel++;
                     //System.out.println("TOMEI DANONINHO");
-                    player.LifeX -= 5;
+                    player.lifeX -= 5;
                 }
             }
         } else {
@@ -167,22 +172,69 @@ public class GameScreen extends JPanel{
             num = random.nextInt(5)+1;
             //System.out.println("oi: "+num);
             if(num == 5){
-                item.add(new Item((int)inimigos.get(i).xEnemy, (int)inimigos.get(i).yEnemy));
+                int num2 = random.nextInt(3)+1;
+                item.add(new Item(inimigos.get(i).xEnemy, inimigos.get(i).yEnemy, num2));
             }
             inimigos.remove(i);
         }
        }
 
+       /* item render + hitbox */
        for(int i=0;i<item.size();i++){
         item.get(i).update();
-        if(player.LifeX < 100){
             if(item.get(i).rectangle.intersects(player.rectangle)){
-                player.LifeX += 10;
+                if(item.get(i).type == 1 && player.lifeX < 100){
+                    player.lifeX += 10;
+                } else if((item.get(i).type == 2) && (fastGame == false)){
+                    fastGame = true;
+                } else if(item.get(i).type == 3 && player.combustivel < 100){
+                    player.combustivel += 20;
+                }
                 item.remove(i);
-            }
         }
         
        }
+
+       /* MODO DE JOGO RÁPIDO */
+
+       if(fastGame){
+            //System.out.println("ola ativei");
+            countFastGame++;
+            addpontos = 20;
+            for(int i=0;i<inimigos.size();i++){
+                inimigos.get(i).aceleraçaoX = 20;
+            }
+            fundo.vx1 = 4;
+            fundo.vx2 = 6;
+            fundo.vx3 = 12;
+            fundo.vx4 = 44;
+
+            for(int i=0;i<item.size();i++){
+                item.get(i).aceleracaoX = 13;
+                item.get(i).aceleracaoY = 5;
+            }
+       }
+
+       if(countFastGame >= 1200){
+            fastGame = false;
+            for(int i=0;i<inimigos.size();i++){
+                inimigos.get(i).aceleraçaoX = 10;
+            }
+            fundo.vx1 = 1;
+            fundo.vx2 = 2;
+            fundo.vx3 = 8;
+            fundo.vx4 = 30;
+
+            for(int i=0;i<item.size();i++){
+                item.get(i).aceleracaoX = 7;
+                item.get(i).aceleracaoY = 3;
+            }
+            //System.out.println("ola desativei");
+            countFastGame = 0;
+            addpontos = 10;
+       }
+
+       /* CONTAGEM DE JOGO */
 
         //System.out.println(tempoInvencivel);
         tempoDeJogo++;
@@ -199,11 +251,26 @@ public class GameScreen extends JPanel{
     }
 
     public void EnemyWave(){
-        inimigos.add(new Enemy(2, 800, 1800));
-        inimigos.add(new Enemy(1, 600,1950));
-        inimigos.add(new Enemy(2, 400, 1960));
-        inimigos.add(new Enemy(3, 300, 1900));
-        inimigos.add(new Enemy(1, 100, 1500));
+        float y = random.nextFloat(800)+1;
+        float x = random.nextFloat(1400)+1400;
+        int v = random.nextInt(3)+1;
+        inimigos.add(new Enemy(v, y, x));
+        y = random.nextFloat(800)+1;
+        x = random.nextFloat(1400)+1400;
+        v = random.nextInt(3)+1;
+        inimigos.add(new Enemy(v,y,x));
+        y = random.nextFloat(800)+1;
+        x = random.nextFloat(1400)+1400;
+        v = random.nextInt(3)+1;
+        inimigos.add(new Enemy(v,y,x));
+        y = random.nextFloat(800)+1;
+        x = random.nextFloat(1400)+1400;
+        v = random.nextInt(3)+1;
+        inimigos.add(new Enemy(v,y,x));
+        y = random.nextFloat(800)+1;
+        x = random.nextFloat(1400)+1400;
+        v = random.nextInt(3)+1;
+        inimigos.add(new Enemy(v,y,x));
     }
 
 }

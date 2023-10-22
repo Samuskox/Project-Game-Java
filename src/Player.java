@@ -25,11 +25,15 @@ public class Player {
     Tecla teclas = new Tecla();
     boolean invencivel = false;
     int timerDash;
+    boolean dash;
     //FrameGame TelaTecla2 = new FrameGame();
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     ArrayList<Angle> angulos = new ArrayList<Angle>();
 
-    int LifeX = 100;
+    int lifeX = 100;
+    int combustivel = 100;
+    boolean tirarCombustivel = false;
+    
 
 
     Image robo;
@@ -59,7 +63,12 @@ public class Player {
         g.setColor(Color.RED);
         g.fillRect(10, 10, 100*2, 50);
         g.setColor(new Color(131, 137, 222));
-        g.fillRect(10, 10, LifeX*2, 50);
+        g.fillRect(10, 10, lifeX*2, 50);
+
+        g.setColor(Color.black);
+        g.drawRect(10, 70, 200,50);
+        g.setColor(Color.blue);
+        g.fillRect(10, 70, combustivel*2, 50);
     }
 
     public void update(Mouse mouse, Tecla tecla){
@@ -83,26 +92,35 @@ public class Player {
             if(rectangle.intersects(mouse.rectangle)){
                xVelo =0;
                yVelo =0;
-               //System.out.println("DESVIA O Menô");
             }
             x += xVelo;
             y += yVelo;
         }
 
             /* HABILIDADE DASH DO PERSONAGEM */
-        if(tecla.space == true){
+        if(tecla.space == true && combustivel >= 30 && dash == false){
+            if(timerDash == 0){
+                combustivel -= 30;
+            }
             timerDash++;
-            System.out.println(timerDash);
             acelerarX = 22;
             acelerarY = 22;
-            if(timerDash == 15){
+            dash = true;
+            tecla.space = false;
+            
+        }
+        if(dash == true){
+            timerDash++;
+            
+        }
+        if(timerDash == 15){
                 acelerarX = 5;
                 acelerarY = 5;
                 timerDash = 0;
-                System.out.println(acelerarX+" "+acelerarY);
-                tecla.space = false;
+                
+                dash = false;
+                
             }
-        }
         
 
         /* cooldown de dano de inimigo em relação ao persogangem */
@@ -114,21 +132,6 @@ public class Player {
                 tempo = 0;
             }
         }
-
-       
-
-
-        //for(int i=0;i<bullets.size();i++){
-        //    if((bullets.get(i).rectangle.intersects(enemigo.rectangle)) && invencivel==false){
-        //        invencivel=true;
-        //        //System.out.println("ATIREI PORRA MORRE LOGO KARALHO");
-        //        enemigo.life--;
-        //        System.out.println(enemigo.life);
-        //    }
-        //}
-
-        
-
         //System.out.println(x+" "+y);
         //System.out.println(xVelo+" "+yVelo );
         //System.out.println(vaiPralaX+" "+vaiPralaY );

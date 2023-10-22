@@ -5,31 +5,49 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 
 public class Item {
-    int x;
-    int y;
+    float x;
+    float y;
     int tempo;
     Rectangle rectangle = new Rectangle((int)x - 50, (int)y - 50, 50, 50);
-    Image RaioCura;
+    Image Item;
+    int type;
+    Image RaioCombustivel;
+    float aceleracaoX = 7;
+    float aceleracaoY = 3;
 
-    Item(int x, int y){
+    Item(float x, float y, int type){
         this.x = x;
         this.y = y;
+        this.type = type;
 
-        try {
-            RaioCura = ImageIO.read(getClass().getResourceAsStream("/assets/RaioCura.png"));
+        if(type == 1){
+            try {
+            Item = ImageIO.read(getClass().getResourceAsStream("/assets/Raio.png"));
         } catch (IOException e) {
+            }
+        } else if(type == 2){
+            try {
+            Item = ImageIO.read(getClass().getResourceAsStream("/assets/Rapidez.png"));
+        } catch (IOException e) {
+            }
+        } else if(type == 3){
+            try {
+            Item = ImageIO.read(getClass().getResourceAsStream("/assets/Combustivel.png"));
+        } catch (IOException e) {
+            }
         }
+        
     }
 
 
     public void paint(Graphics2D g){
         //g.draw(rectangle);
-        g.drawImage(RaioCura, x, y, 50,50,null);
+        g.drawImage(Item, (int)x, (int)y, 50,50,null);
     }
 
     public void update(){
         rectangle = new Rectangle((int)x, (int)y, 50, 50);
-        y++;
-        x--;
+        y += aceleracaoY;
+        x -= aceleracaoX;
     }
 }

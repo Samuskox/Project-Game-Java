@@ -29,11 +29,8 @@ public class TitleScreen extends JPanel implements ActionListener{
         botao2.addActionListener(this);
         botao2.setText("fechar");
 
-
-
-
         this.setBounds(0, 0, 1400, 900);
-        this.setBackground(Color.BLUE);
+        this.setBackground(Color.white);
         this.setVisible(true);
         this.setOpaque(true);
         this.add(botao);
