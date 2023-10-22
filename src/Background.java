@@ -74,7 +74,7 @@ public class Background {
     g.drawImage(fundoPoeira1, x5,0, null);
     }
     public void paintBackgroundPoeira(Graphics2D g){
-        g.drawImage(Poeira, x6, 0,null);
+        //g.drawImage(Poeira, x6, 0,null);
     }
 
     public void update(){
