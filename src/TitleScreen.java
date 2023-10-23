@@ -3,18 +3,24 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import java.awt.Graphics;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.MouseInputListener;
 import java.awt.Graphics2D;
 import org.w3c.dom.events.MouseEvent;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.awt.Image;
 
 public class TitleScreen extends JPanel implements ActionListener{
     boolean aparecer = true;
     JButton botao;
     JButton botao2;
+    Image image;
     
 
     TitleScreen(){
@@ -29,6 +35,8 @@ public class TitleScreen extends JPanel implements ActionListener{
         botao2.setBounds(400, 500, 500, 100);
         botao2.addActionListener(this);
         botao2.setText("fechar");
+        botao.setVisible(true);
+        botao2.setVisible(true);
 
         this.setBounds(0, 0, 1400, 900);
         this.setBackground(Color.white);
@@ -36,6 +44,17 @@ public class TitleScreen extends JPanel implements ActionListener{
         this.setOpaque(true);
         this.add(botao);
         this.add(botao2);
+
+
+         try {
+            image = ImageIO.read(getClass().getResourceAsStream("/assets/LOGO.png"));
+        } catch (IOException e) {
+        }
+    }
+
+    public void paint(Graphics g){
+        super.paintComponent(g);
+        g.drawImage(image, 0,0, null);
     }
 
     
