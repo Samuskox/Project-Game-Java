@@ -120,19 +120,34 @@ public class Player {
 
 
         /* VELOCIDADE DO PERSONAGEM + MOVIMENTAÇÂO COM MOUSE */   
-        vaiPralaX = mouse.xizinho - 32;
-        vaiPralaY = mouse.ypsilinho - 32;
-        if(mouse.moved){
-            angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
-            xVelo = (float) ((acelerarX)*Math.cos(angulo));
-            yVelo = (float) ((acelerarY)*Math.sin(angulo));
-            if(rectangle.intersects(mouse.rectangle)){
-               xVelo =0;
-               yVelo =0;
-            }
-            x += xVelo;
-            y += yVelo;
+        //vaiPralaX = mouse.xizinho - 32;
+        //vaiPralaY = mouse.ypsilinho - 32;
+        //if(mouse.moved){
+        //    angulo = (float)Math.atan2(vaiPralaY - y, vaiPralaX - x);
+        //    xVelo = (float) ((acelerarX)*Math.cos(angulo));
+        //    yVelo = (float) ((acelerarY)*Math.sin(angulo));
+        //    if(rectangle.intersects(mouse.rectangle)){
+        //       xVelo =0;
+        //       yVelo =0;
+        //    }
+        //    x += xVelo;
+        //    y += yVelo;
+        //}
+
+        if(tecla.up){
+            y -= acelerarY; 
         }
+        if(tecla.left){
+            x -= acelerarX; 
+        }
+        if(tecla.down){
+            y += acelerarY; 
+        }
+        if(tecla.right){
+            x += acelerarX;
+        }
+
+        
 
             /* HABILIDADE DASH DO PERSONAGEM */
         if(tecla.space == true && combustivel >= 30 && dash == false){
@@ -140,8 +155,8 @@ public class Player {
                 combustivel -= 30;
             }
             timerDash++;
-            acelerarX = 22;
-            acelerarY = 22;
+            acelerarX = 18;
+            acelerarY = 18;
             dash = true;
             tecla.space = false;
             

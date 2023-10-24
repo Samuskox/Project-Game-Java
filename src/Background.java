@@ -71,7 +71,7 @@ public class Background {
     g.drawImage(fundo2, x2, 0, null);
     g.drawImage(fundo3, x3, 0, null);
     g.drawImage(predios1, x4, 0, null);
-    g.drawImage(fundoPoeira1, x5,0, null);
+    g.drawImage(fundoPoeira, x5,0, null);
     }
     public void paintBackgroundPoeira(Graphics2D g){
         //g.drawImage(Poeira, x6, 0,null);
@@ -108,14 +108,14 @@ public class Background {
 
         if(x5 <= 0){
             x5 -= vx5;
-            if(x5 <= -700){
+            if(x5 <= -1400){
                 x5 = 0;
             }
         }
 
         if(x6 <= 0){
             x6 -= vx6;
-            if(x6 <= -700){
+            if(x6 <= -1400){
                 x6 = 0;
             }
         }

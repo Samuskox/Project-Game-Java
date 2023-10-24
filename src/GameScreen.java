@@ -35,7 +35,7 @@ public class GameScreen extends JPanel{
     int tempoDeJogo = 0;
     int segundos = 0;
     int tempoRenderEnemy = 0;
-    int tempoRenderEnemyCoolDown = 120;
+    int tempoRenderEnemyCoolDown = 0;
     int tempoInvencivel =0;
 
     int pontos;
@@ -74,7 +74,7 @@ public class GameScreen extends JPanel{
         fundo.paintBackgroundPoeira(g2D);
         g2D.setColor(new Color(131, 137, 222));
         g2D.setFont(new Font("Igor", Font.PLAIN, 50));
-        g2D.drawString("Pontos: "+pontos, 1100, 61);
+        g2D.drawString("Pontos: "+pontos, 1000, 61);
     }
 
     public void update(PanelGame panelGame){
@@ -95,12 +95,14 @@ public class GameScreen extends JPanel{
                 inimigos.add(new Enemy(variation, Yenemy, Xenemy));
                 //EnemyWave();
                 EnemysWaves(quantidadeEnimigo);
-                quantidadeEnimigo++;
+                //quantidadeEnimigo++;
                 tempoRenderEnemy = 0;
             }
             for(int  i = 0; i < inimigos.size(); i++){
                 inimigos.get(i).update(player);
             }
+
+            
 
             /* ATIRAR + RENDERIZAÇÂO DAS BALAS */
             if(mouse.clicked && powPowLiberado){
@@ -236,7 +238,7 @@ public class GameScreen extends JPanel{
             }
        }
 
-       if(countFastGame >= 1000){
+       if(countFastGame >= 960){
             fastGame = false;
             for(int i=0;i<inimigos.size();i++){
                 inimigos.get(i).aceleraçaoX = 10;
@@ -263,11 +265,20 @@ public class GameScreen extends JPanel{
         if(tempoDeJogo == 60){
             tempoDeJogo = 0;
             segundos++;
+            if(fastGame){
+                pontos += 3;
+            } else {
+                pontos += 1;
+            }
+            
+            tempoRenderEnemyCoolDown++;
             //System.exit(0);
             //System.out.println(segundos);
             }
-        if(segundos%10 == 0){
-            tempoRenderEnemyCoolDown -= 10;
+        
+        if(tempoRenderEnemyCoolDown == 10){
+            quantidadeEnimigo++;
+            tempoRenderEnemyCoolDown = 0;
         }
         
     }

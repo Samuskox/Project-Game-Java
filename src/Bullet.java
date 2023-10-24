@@ -30,13 +30,14 @@ public class Bullet {
     }
 
     public void paintBullet(Graphics2D g){   
-            g.setColor(Color.gray);
-            g.fillRect((int)xBullet,(int)yBullet, 20, 10);
+            //g.setColor(Color.gray);
+            g.setColor(new Color(40, 40, 40));
+            g.fillRect((int)xBullet,(int)yBullet, 20, 7);
             //g.draw(rectangle);
     }
 
     public void update(){
-        rectangle = new Rectangle((int)xBullet, (int)yBullet, 20, 10);        
+        rectangle = new Rectangle((int)xBullet, (int)yBullet, 20, 7);        
             xBullet = x + 32;
             yBullet = y + 32;
             xVeloBullet = (float) (17*Math.cos(Angulo.angulo));

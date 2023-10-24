@@ -58,7 +58,7 @@ public class PanelGame extends JPanel implements Runnable{
             gameScreen.setVisible(true);
             g2D.dispose();
         } else {
-            
+            menu.draw(g2D);
         }
 
     }

@@ -1,7 +1,9 @@
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.io.File;
@@ -34,7 +36,7 @@ public class TitleScreen extends JPanel implements ActionListener{
         botao2.setBackground(Color.white);
         botao2.setBounds(400, 500, 500, 100);
         botao2.addActionListener(this);
-        botao2.setText("fechar");
+        botao2.setText("Sair");
         botao.setVisible(true);
         botao2.setVisible(true);
 
@@ -52,12 +54,14 @@ public class TitleScreen extends JPanel implements ActionListener{
         }
     }
 
-    public void paint(Graphics g){
-        super.paintComponent(g);
-        g.drawImage(image, 0,0, null);
-    }
+    // public void paint(Graphics g){
+    //     super.paintComponent(g);
+    //     g.drawImage(image, 0,0, null);
+    // }
 
-    
+    public void draw(Graphics2D g2){
+        g2.drawImage(image, 100, 0, null);
+    }
 
     
 
