@@ -280,7 +280,11 @@ public class GameScreen extends JPanel{
             quantidadeEnimigo++;
             tempoRenderEnemyCoolDown = 0;
         }
-        
+
+        /* MORTE */
+        if(player.lifeX < 0){
+            System.exit(0);
+        }
     }
 
     public void EnemyWave(){

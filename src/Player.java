@@ -100,7 +100,7 @@ public class Player {
         /* HUD RAPIDEZ */
 
         if(modoRapido){
-            g.drawImage(HUDrapido, 320, 3, modoRapidoCount/10, 90, null);
+            g.drawImage(HUDrapido, 320, 3, 100, 90, null);
             
         }
 
@@ -134,6 +134,8 @@ public class Player {
         //    y += yVelo;
         //}
 
+
+        /*VELOCIDADE DO PERSONAGEM + MOVIMENTAÇÃO COM TECLAS */
         if(tecla.up){
             y -= acelerarY; 
         }
@@ -147,7 +149,23 @@ public class Player {
             x += acelerarX;
         }
 
-        
+        /* limites do mapa */
+        if(y < 0){
+            y+=acelerarY;
+            tecla.up = false;
+        }
+        if(x < 0){
+            x+=acelerarX;
+            tecla.left = false;
+        }
+        if(y > 900){
+            y-=acelerarY;
+            tecla.down = false;
+        }
+        if(x > 1400){
+            x -= acelerarX;
+            tecla.right = false;
+        }
 
             /* HABILIDADE DASH DO PERSONAGEM */
         if(tecla.space == true && combustivel >= 30 && dash == false){
@@ -169,9 +187,7 @@ public class Player {
                 acelerarX = 5;
                 acelerarY = 5;
                 timerDash = 0;
-                
                 dash = false;
-                
             }
         
 
