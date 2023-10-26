@@ -158,11 +158,11 @@ public class Player {
             x+=acelerarX;
             tecla.left = false;
         }
-        if(y > 900){
+        if(y + 98 > 900){
             y-=acelerarY;
             tecla.down = false;
         }
-        if(x > 1400){
+        if(x + 98 > 1400){
             x -= acelerarX;
             tecla.right = false;
         }

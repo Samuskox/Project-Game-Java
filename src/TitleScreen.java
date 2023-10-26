@@ -1,20 +1,10 @@
 import java.awt.Color;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.Graphics;
-import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.MouseInputListener;
 import java.awt.Graphics2D;
-import org.w3c.dom.events.MouseEvent;
-import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.awt.Image;
 
@@ -52,6 +42,7 @@ public class TitleScreen extends JPanel implements ActionListener{
             image = ImageIO.read(getClass().getResourceAsStream("/assets/LOGO.png"));
         } catch (IOException e) {
         }
+        this.setLayout(null);
     }
 
     // public void paint(Graphics g){

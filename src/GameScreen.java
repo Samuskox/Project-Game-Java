@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JPanel;
 
+
 public class GameScreen extends JPanel{
 
     Random random = new Random();
@@ -45,6 +46,8 @@ public class GameScreen extends JPanel{
     boolean fastGame = false;
     int countFastGame = 0;
     int quantidadeEnimigo = 1;
+
+    boolean fimDeJogo = false;
 
 
     GameScreen(){
@@ -283,7 +286,8 @@ public class GameScreen extends JPanel{
 
         /* MORTE */
         if(player.lifeX < 0){
-            System.exit(0);
+            fimDeJogo = true;
+            //System.exit(0);
         }
     }
 
